@@ -6,19 +6,109 @@
 <title>Proyecto Integrador TI</title>
 
 <style>
-body {font-family: Arial; margin:0; background:#eef2f7;}
-header {background:#111827; color:white; padding:20px; text-align:center;}
-.container {max-width:1100px; margin:auto; padding:20px;}
-.card {background:white; padding:20px; margin:15px 0; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.1);}
-textarea, input {width:100%; padding:10px; margin-top:8px; border-radius:6px; border:1px solid #ccc;}
-button {background:#111827; color:white; padding:10px; border:none; margin-top:10px; cursor:pointer; border-radius:6px;}
-select {width:100%; padding:10px; border-radius:6px;}
-.hidden {display:none;}
-.progress {height:10px; background:#ccc; margin-top:10px;}
-.bar {height:10px; background:#16a34a; width:0%;}
-.warning {color:red;}
-.success {color:green;}
-.lock {background:#ddd; cursor:not-allowed;}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root {
+  --primary: #1e3a8a;
+  --secondary: #3b82f6;
+  --accent: #2563eb;
+  --bg: #f1f5f9;
+  --card: #ffffff;
+  --text: #0f172a;
+  --border: #e2e8f0;
+  --success: #16a34a;
+  --error: #dc2626;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+header {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  padding: 25px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 25px;
+}
+
+.card {
+  background: var(--card);
+  padding: 22px;
+  margin: 18px 0;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+  transition: 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+textarea, input, select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+}
+
+textarea:focus, input:focus, select:focus {
+  outline: none;
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+}
+
+button {
+  background: var(--primary);
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  margin-top: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+button:hover {
+  background: var(--accent);
+}
+
+.hidden { display:none; }
+
+.progress {
+  height: 10px;
+  background: var(--border);
+  margin-top: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.bar {
+  height: 10px;
+  background: var(--success);
+  width: 0%;
+  transition: 0.3s;
+}
+
+.warning { color: var(--error); font-weight:600; }
+.success { color: var(--success); font-weight:600; }
+
+.locked {
+  opacity: 0.5;
+  pointer-events: none;
+}
 </style>
 </head>
 
@@ -31,26 +121,29 @@ select {width:100%; padding:10px; border-radius:6px;}
 
 <div class="container">
 
+<!-- ESCENARIO -->
+<div class="card">
+<h3>📌 Caso: LogiMex Inteligente S.A.</h3>
+<p><b>Operación:</b> 3,500 pedidos diarios</p>
+<p><b>Pérdida:</b> $85,000 MXN por hora de caída</p>
+<p><b>Infraestructura:</b> 95 PCs, 6 servidores</p>
+<p><b>Presupuesto:</b> $1,200,000 MXN</p>
+<p><b>Problema:</b> Fallas constantes y pérdida de datos</p>
+</div>
+
 <!-- INSTRUCCIONES -->
 <div class="card">
 <h3>📘 Instrucciones</h3>
 <ul>
-<li>Responde con decisiones reales, no teoría</li>
+<li>Responde con decisiones reales</li>
 <li>Usa datos del caso</li>
 <li>Justifica todo</li>
 <li>Usa IA críticamente</li>
+<li>Debes interactuar con un compañero</li>
 </ul>
-
-<h3>📊 Caso LogiMex</h3>
-<p>120 empleados | 95 PCs | 6 servidores</p>
-<p>3,500 pedidos diarios | $85,000 pérdida/hora</p>
-<p>Presupuesto: $1,200,000 MXN</p>
-
-<h3>🔁 Interacción obligatoria</h3>
-<p>Debes evaluar a un compañero antes de avanzar a la integración final</p>
 </div>
 
-<!-- SELECTOR -->
+<!-- ROL -->
 <select id="rol" onchange="cargarRol()">
 <option value="">Selecciona tu rol</option>
 <option value="sebastian">Sebastián - Estrategia</option>
@@ -63,7 +156,7 @@ select {width:100%; padding:10px; border-radius:6px;}
 
 <!-- ROLES -->
 <div id="sebastian" class="card hidden">
-<h3>🎯 Estrategia</h3>
+<h3>Estrategia</h3>
 <input id="s1" placeholder="Problema principal">
 <input id="s2" placeholder="Objetivo medible">
 <textarea id="s3" placeholder="Impacto económico"></textarea>
@@ -73,65 +166,52 @@ select {width:100%; padding:10px; border-radius:6px;}
 </div>
 
 <div id="partida" class="card hidden">
-<h3>💼 Negocio</h3>
-<textarea id="p1" placeholder="Servicios"></textarea>
-<input id="p2" placeholder="Producto clave">
-<textarea id="p3" placeholder="Qué NO harías"></textarea>
-<textarea id="p4" placeholder="Impacto"></textarea>
-<textarea id="p5" placeholder="IA"></textarea>
+<h3>Negocio</h3>
+<textarea id="p1"></textarea>
+<input id="p2">
+<textarea id="p3"></textarea>
+<textarea id="p4"></textarea>
+<textarea id="p5"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
 <div id="yael" class="card hidden">
-<h3>🖥️ Infraestructura</h3>
-<input id="y1" placeholder="Decisión nube/renta/compra">
-<textarea id="y2" placeholder="Justificación"></textarea>
-<textarea id="y3" placeholder="Reducción fallas"></textarea>
-<input id="y4" placeholder="Costo">
-<textarea id="y5" placeholder="IA"></textarea>
+<h3>Infraestructura</h3>
+<input id="y1">
+<textarea id="y2"></textarea>
+<textarea id="y3"></textarea>
+<input id="y4">
+<textarea id="y5"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
 <div id="johan" class="card hidden">
-<h3>🔐 Seguridad</h3>
-<input id="j1" placeholder="Riesgo">
-<textarea id="j2" placeholder="Solución"></textarea>
-<textarea id="j3" placeholder="Respaldo"></textarea>
-<textarea id="j4" placeholder="Seguro"></textarea>
-<textarea id="j5" placeholder="IA"></textarea>
+<h3>Seguridad</h3>
+<input id="j1">
+<textarea id="j2"></textarea>
+<textarea id="j3"></textarea>
+<textarea id="j4"></textarea>
+<textarea id="j5"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
-<!-- VALIDACION CRUZADA -->
+<!-- VALIDACION -->
 <div class="card">
 <h3>🔁 Validación Cruzada</h3>
-<p>Evalúa a tu compañero asignado</p>
-
-<textarea id="val1" placeholder="Errores detectados (mínimo 2)"></textarea>
-<textarea id="val2" placeholder="Decisiones poco realistas"></textarea>
-<textarea id="val3" placeholder="Recomendaciones"></textarea>
-
-<button onclick="guardar()">Guardar</button>
-</div>
-
-<!-- CRISIS -->
-<div class="card">
-<h3>⚠️ Crisis</h3>
-<textarea id="crisis" placeholder="Respuesta y costo"></textarea>
+<textarea id="v1" placeholder="Errores detectados"></textarea>
+<textarea id="v2" placeholder="Mejoras sugeridas"></textarea>
+<textarea id="v3" placeholder="Evaluación crítica"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
 <!-- INTEGRACION -->
-<div class="card" id="integracion">
+<div id="integracion" class="card locked">
 <h3>🧩 Integración Final</h3>
-<p class="warning">Se desbloquea después de la validación cruzada</p>
-
-<textarea id="f1" placeholder="Propuesta integral"></textarea>
-<textarea id="f2" placeholder="Decisión clave"></textarea>
-<textarea id="f3" placeholder="Impacto global"></textarea>
-<textarea id="f4" placeholder="Riesgos"></textarea>
-<textarea id="f5" placeholder="Defensa"></textarea>
-
+<textarea id="f1"></textarea>
+<textarea id="f2"></textarea>
+textarea id="f3"></textarea>
+<textarea id="f4"></textarea>
+<textarea id="f5"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
@@ -170,7 +250,6 @@ document.querySelectorAll("textarea,input").forEach(t=>{
 localStorage.setItem(t.id,t.value);
 });
 actualizar();
-alert("Guardado");
 }
 
 function cargarDatos(){
@@ -191,29 +270,25 @@ if(t.value.trim()!="") llenos++;
 document.getElementById("barra").style.width=(llenos/total*100)+"%";
 
 /* desbloqueo integración */
-let val1=localStorage.getItem("val1")||"";
-let val2=localStorage.getItem("val2")||"";
-let val3=localStorage.getItem("val3")||"";
+let ok = localStorage.getItem("v1") && localStorage.getItem("v2") && localStorage.getItem("v3");
 
-let integracion=document.getElementById("integracion");
+let integ=document.getElementById("integracion");
 
-if(val1.length>20 && val2.length>20 && val3.length>20){
-integracion.style.opacity="1";
-integracion.style.pointerEvents="auto";
+if(ok && ok.length>10){
+integ.classList.remove("locked");
 }else{
-integracion.style.opacity="0.5";
-integracion.style.pointerEvents="none";
+integ.classList.add("locked");
 }
 }
 
 function verificar(){
 let campos=document.querySelectorAll("textarea,input");
-let faltantes=0;
+let faltan=0;
 
 campos.forEach(c=>{
 if(c.value.trim().length<20){
 c.style.border="2px solid red";
-faltantes++;
+faltan++;
 }else{
 c.style.border="1px solid #ccc";
 }
@@ -221,23 +296,16 @@ c.style.border="1px solid #ccc";
 
 let r=document.getElementById("resultado");
 
-if(faltantes>0){
-r.innerHTML="❌ Faltan "+faltantes+" campos";
+if(faltan>0){
+r.innerHTML="❌ Incompleto: "+faltan+" campos";
 r.className="warning";
 }else{
-r.innerHTML="✅ Actividad completa";
+r.innerHTML="✅ Completo";
 r.className="success";
 }
 }
 
 function exportar(){
-let r=document.getElementById("resultado").innerText;
-
-if(!r.includes("completa")){
-alert("Primero completa la actividad");
-return;
-}
-
 let data={};
 
 document.querySelectorAll("textarea,input").forEach(t=>{
