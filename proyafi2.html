@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulación Profesional TI</title>
+
+<style>
+body {font-family: Arial; margin:0; background:#eef2f7;}
+header {background:#111827; color:white; padding:20px; text-align:center;}
+.container {max-width:1100px; margin:auto; padding:20px;}
+.card {background:white; padding:20px; margin:15px 0; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.1);}
+textarea {width:100%; height:120px; margin-top:10px; padding:10px;}
+input {width:100%; padding:10px; margin-top:5px;}
+button {background:#111827; color:white; padding:10px; border:none; margin-top:10px; cursor:pointer;}
+select {width:100%; padding:10px;}
+.hidden {display:none;}
+.progress {height:10px; background:#ccc;}
+.bar {height:10px; background:#16a34a; width:0%;}
+.warning {color:red; font-size:14px;}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>Simulación Profesional: Unidad Informática</h2>
+<p>Decisiones reales con impacto económico y operativo</p>
+</header>
+
+<div class="container">
+
+<!-- ESCENARIO -->
+<div class="card">
+<h3>📊 Caso LogiMex</h3>
+<p><b>Pedidos:</b> 3,500 diarios | <b>Pérdida:</b> $85,000/hora</p>
+<p><b>Infraestructura:</b> 95 PCs, 6 servidores</p>
+<p><b>Problema:</b> Caídas frecuentes + pérdida de datos</p>
+<p><b>Presupuesto:</b> $1,200,000 MXN</p>
+
+<p class="warning"><b>Regla:</b> Toda decisión debe justificar impacto en dinero o operación</p>
+</div>
+
+<!-- EVALUACION -->
+<div class="card">
+<h3>📌 Cómo se evalúa</h3>
+<ul>
+<li>Uso de datos reales del caso</li>
+<li>Decisiones justificadas</li>
+<li>Uso crítico de IA</li>
+<li>Impacto medible</li>
+</ul>
+</div>
+
+<select id="rol" onchange="cargarRol()">
+<option value="">Selecciona tu rol</option>
+<option value="sebastian">Sebastián - Estrategia</option>
+<option value="partida">Pedro Partida - Negocio</option>
+<option value="yael">Pedro Yael - Infraestructura</option>
+<option value="johan">Johan - Seguridad</option>
+</select>
+
+<div class="progress"><div class="bar" id="barra"></div></div>
+
+<!-- SEBASTIAN -->
+<div id="sebastian" class="card hidden">
+<h3>🎯 Estrategia</h3>
+
+<p><b>Problema prioritario:</b></p>
+<input id="s1">
+
+<p><b>Objetivo medible (con número):</b></p>
+<input id="s2" placeholder="Ej: reducir fallas 80%">
+
+<p><b>Impacto económico:</b></p>
+<textarea id="s3" placeholder="Explica en dinero"></textarea>
+
+<p><b>Roles y funciones:</b></p>
+<textarea id="s4"></textarea>
+
+<p><b>IA:</b></p>
+<textarea id="s5" placeholder="Prompt + análisis"></textarea>
+
+<button onclick="guardar()">Guardar</button>
+</div>
+
+<!-- PARTIDA -->
+<div id="partida" class="card hidden">
+<h3>💼 Negocio</h3>
+
+<p><b>Servicios propuestos:</b></p>
+<textarea id="p1"></textarea>
+
+<p><b>Producto clave:</b></p>
+<input id="p2">
+
+<p><b>Qué NO harías:</b></p>
+<textarea id="p3"></textarea>
+
+<p><b>Impacto en operación:</b></p>
+<textarea id="p4"></textarea>
+
+<p><b>IA:</b></p>
+<textarea id="p5"></textarea>
+
+<button onclick="guardar()">Guardar</button>
+</div>
+
+<!-- YAEL -->
+<div id="yael" class="card hidden">
+<h3>🖥️ Infraestructura</h3>
+
+<p><b>Decisión:</b> Compra / Nube / Renta</p>
+<input id="y1">
+
+<p><b>Justificación:</b></p>
+<textarea id="y2"></textarea>
+
+<p><b>Reducción de fallas:</b></p>
+<textarea id="y3"></textarea>
+
+<p><b>Costo estimado:</b></p>
+<input id="y4">
+
+<p><b>IA:</b></p>
+<textarea id="y5"></textarea>
+
+<button onclick="guardar()">Guardar</button>
+</div>
+
+<!-- JOHAN -->
+<div id="johan" class="card hidden">
+<h3>🔐 Seguridad</h3>
+
+<p><b>Riesgo principal:</b></p>
+<input id="j1">
+
+<p><b>Solución:</b></p>
+<textarea id="j2"></textarea>
+
+<p><b>Respaldo:</b></p>
+<textarea id="j3"></textarea>
+
+<p><b>Seguro:</b></p>
+<textarea id="j4"></textarea>
+
+<p><b>IA:</b></p>
+<textarea id="j5"></textarea>
+
+<button onclick="guardar()">Guardar</button>
+</div>
+
+<!-- CRISIS -->
+<div class="card">
+<h3>⚠️ Crisis</h3>
+<p>Caída total del sistema en hora pico</p>
+
+<textarea id="crisis" placeholder="Respuesta inmediata + recuperación + costo"></textarea>
+
+<button onclick="guardar()">Guardar</button>
+</div>
+
+<!-- EXPORT -->
+<div class="card">
+<h3>📤 Entrega</h3>
+<button onclick="exportar()">Descargar evidencia</button>
+
+<br><br>
+
+<a href="mailto:TU_CORREO@ejemplo.com">
+<button>Enviar correo</button>
+</a>
+</div>
+
+</div>
+
+<script>
+function cargarRol(){
+let rol = document.getElementById("rol").value;
+document.querySelectorAll(".card").forEach(c=>{
+if(c.id) c.classList.add("hidden");
+});
+if(rol) document.getElementById(rol).classList.remove("hidden");
+cargarDatos();
+}
+
+function guardar(){
+document.querySelectorAll("textarea,input").forEach(t=>{
+localStorage.setItem(t.id,t.value);
+});
+actualizar();
+alert("Guardado");
+}
+
+function cargarDatos(){
+document.querySelectorAll("textarea,input").forEach(t=>{
+t.value = localStorage.getItem(t.id)||"";
+});
+actualizar();
+}
+
+function actualizar(){
+let total=document.querySelectorAll("textarea,input").length;
+let llenos=0;
+document.querySelectorAll("textarea,input").forEach(t=>{
+if(t.value.trim()!="") llenos++;
+});
+document.getElementById("barra").style.width=(llenos/total*100)+"%";
+}
+
+function exportar(){
+let data={};
+document.querySelectorAll("textarea,input").forEach(t=>{
+data[t.id]=t.value;
+});
+let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+let a=document.createElement("a");
+a.href=URL.createObjectURL(blob);
+a.download="evidencia.json";
+a.click();
+}
+</script>
+
+</body>
+</html>
