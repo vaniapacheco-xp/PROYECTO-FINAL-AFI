@@ -150,6 +150,7 @@ button:hover {
 <option value="partida">Pedro Partida - Negocio</option>
 <option value="yael">Pedro Yael - Infraestructura</option>
 <option value="johan">Johan - Seguridad</option>
+<option value="omar">Omar Martínez - Integración</option>
 </select>
 
 <div class="progress"><div class="bar" id="barra"></div></div>
@@ -157,11 +158,11 @@ button:hover {
 <!-- ROLES -->
 <div id="sebastian" class="card hidden">
 <h3>Estrategia</h3>
-<input id="s1" placeholder="Problema principal">
-<input id="s2" placeholder="Objetivo medible">
-<textarea id="s3" placeholder="Impacto económico"></textarea>
-<textarea id="s4" placeholder="Roles"></textarea>
-<textarea id="s5" placeholder="IA"></textarea>
+<input id="s1">
+<input id="s2">
+<textarea id="s3"></textarea>
+<textarea id="s4"></textarea>
+<textarea id="s5"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
@@ -195,25 +196,34 @@ button:hover {
 <button onclick="guardar()">Guardar</button>
 </div>
 
+<div id="omar" class="card hidden">
+<h3>Integración del Sistema</h3>
+<input id="o1">
+<textarea id="o2"></textarea>
+<textarea id="o3"></textarea>
+<textarea id="o4"></textarea>
+<textarea id="o5"></textarea>
+<button onclick="guardar()">Guardar</button>
+</div>
+
 <!-- VALIDACION -->
 <div class="card">
 <h3> Validación Cruzada</h3>
-<textarea id="v1" placeholder="Errores detectados"></textarea>
-<textarea id="v2" placeholder="Mejoras sugeridas"></textarea>
-<textarea id="v3" placeholder="Evaluación crítica"></textarea>
+<textarea id="v1"></textarea>
+<textarea id="v2"></textarea>
+<textarea id="v3"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
 <!-- INTEGRACION -->
-<div id="integracion" class="card locked">
-<div id="integracion" class="card locked">
+<div id="integracionCard" class="card locked">
 <h3> Integración Final</h3>
 
-<textarea id="f1" placeholder="Propuesta integral del equipo"></textarea>
-<textarea id="f2" placeholder="Decisión crítica del proyecto"></textarea>
-<textarea id="f3" placeholder="Impacto global en la empresa"></textarea>
-<textarea id="f4" placeholder="Riesgos y mitigación"></textarea>
-<textarea id="f5" placeholder="Defensa del proyecto ante directivos"></textarea>
+<textarea id="f1"></textarea>
+<textarea id="f2"></textarea>
+<textarea id="f3"></textarea>
+<textarea id="f4"></textarea>
+<textarea id="f5"></textarea>
 
 <button onclick="guardar()">Guardar</button>
 </div>
@@ -241,9 +251,11 @@ button:hover {
 
 function cargarRol(){
 let rol=document.getElementById("rol").value;
+
 document.querySelectorAll(".card").forEach(c=>{
-if(c.id && c.id!="integracion") c.classList.add("hidden");
+if(c.id && c.id!=="integracionCard") c.classList.add("hidden");
 });
+
 if(rol) document.getElementById(rol).classList.remove("hidden");
 cargarDatos();
 }
@@ -272,10 +284,8 @@ if(t.value.trim()!="") llenos++;
 
 document.getElementById("barra").style.width=(llenos/total*100)+"%";
 
-/* desbloqueo integración */
 let ok = localStorage.getItem("v1") && localStorage.getItem("v2") && localStorage.getItem("v3");
-
-let integ=document.getElementById("integracion");
+let integ=document.getElementById("integracionCard");
 
 if(ok && ok.length>10){
 integ.classList.remove("locked");
