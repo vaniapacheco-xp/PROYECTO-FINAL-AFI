@@ -3,53 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simulación Profesional TI</title>
+<title>Proyecto Integrador TI</title>
 
 <style>
 body {font-family: Arial; margin:0; background:#eef2f7;}
 header {background:#111827; color:white; padding:20px; text-align:center;}
 .container {max-width:1100px; margin:auto; padding:20px;}
 .card {background:white; padding:20px; margin:15px 0; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.1);}
-textarea {width:100%; height:120px; margin-top:10px; padding:10px;}
-input {width:100%; padding:10px; margin-top:5px;}
-button {background:#111827; color:white; padding:10px; border:none; margin-top:10px; cursor:pointer;}
-select {width:100%; padding:10px;}
+textarea, input {width:100%; padding:10px; margin-top:8px; border-radius:6px; border:1px solid #ccc;}
+button {background:#111827; color:white; padding:10px; border:none; margin-top:10px; cursor:pointer; border-radius:6px;}
+select {width:100%; padding:10px; border-radius:6px;}
 .hidden {display:none;}
-.progress {height:10px; background:#ccc;}
+.progress {height:10px; background:#ccc; margin-top:10px;}
 .bar {height:10px; background:#16a34a; width:0%;}
-.warning {color:red; font-size:14px;}
+.warning {color:red;}
+.success {color:green;}
 </style>
 </head>
 
 <body>
 
 <header>
-<h2>Simulación Profesional: Unidad Informática</h2>
-<p>Decisiones reales con impacto económico y operativo</p>
+<h2>Proyecto Integrador: Unidad Informática</h2>
+<p>Simulación profesional con decisiones reales</p>
 </header>
 
 <div class="container">
 
-<!-- ESCENARIO -->
 <div class="card">
-<h3>📊 Caso LogiMex</h3>
-<p><b>Pedidos:</b> 3,500 diarios | <b>Pérdida:</b> $85,000/hora</p>
-<p><b>Infraestructura:</b> 95 PCs, 6 servidores</p>
-<p><b>Problema:</b> Caídas frecuentes + pérdida de datos</p>
-<p><b>Presupuesto:</b> $1,200,000 MXN</p>
-
-<p class="warning"><b>Regla:</b> Toda decisión debe justificar impacto en dinero o operación</p>
-</div>
-
-<!-- EVALUACION -->
-<div class="card">
-<h3>📌 Cómo se evalúa</h3>
+<h3>📘 Instrucciones</h3>
 <ul>
-<li>Uso de datos reales del caso</li>
-<li>Decisiones justificadas</li>
-<li>Uso crítico de IA</li>
-<li>Impacto medible</li>
+<li>Responde con decisiones reales, no teoría</li>
+<li>Usa los datos del caso</li>
+<li>Justifica todo</li>
+<li>Usa IA de forma crítica</li>
 </ul>
+
+<h3>📊 Caso LogiMex</h3>
+<p>120 empleados | 95 PCs | 6 servidores</p>
+<p>3,500 pedidos diarios</p>
+<p>$85,000 MXN pérdida por hora</p>
+<p>Presupuesto: $1,200,000 MXN</p>
+
+<h3>🎓 Aprobación</h3>
+<p>El proyecto debe ser viable, integrado y justificar decisiones</p>
 </div>
 
 <select id="rol" onchange="cargarRol()">
@@ -62,121 +59,84 @@ select {width:100%; padding:10px;}
 
 <div class="progress"><div class="bar" id="barra"></div></div>
 
-<!-- SEBASTIAN -->
 <div id="sebastian" class="card hidden">
 <h3>🎯 Estrategia</h3>
-
-<p><b>Problema prioritario:</b></p>
-<input id="s1">
-
-<p><b>Objetivo medible (con número):</b></p>
-<input id="s2" placeholder="Ej: reducir fallas 80%">
-
-<p><b>Impacto económico:</b></p>
-<textarea id="s3" placeholder="Explica en dinero"></textarea>
-
-<p><b>Roles y funciones:</b></p>
-<textarea id="s4"></textarea>
-
-<p><b>IA:</b></p>
-<textarea id="s5" placeholder="Prompt + análisis"></textarea>
-
+<input id="s1" placeholder="Problema principal">
+<input id="s2" placeholder="Objetivo medible">
+<textarea id="s3" placeholder="Impacto económico"></textarea>
+<textarea id="s4" placeholder="Roles"></textarea>
+<textarea id="s5" placeholder="IA"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
-<!-- PARTIDA -->
 <div id="partida" class="card hidden">
 <h3>💼 Negocio</h3>
-
-<p><b>Servicios propuestos:</b></p>
-<textarea id="p1"></textarea>
-
-<p><b>Producto clave:</b></p>
-<input id="p2">
-
-<p><b>Qué NO harías:</b></p>
-<textarea id="p3"></textarea>
-
-<p><b>Impacto en operación:</b></p>
-<textarea id="p4"></textarea>
-
-<p><b>IA:</b></p>
-<textarea id="p5"></textarea>
-
+<textarea id="p1" placeholder="Servicios"></textarea>
+<input id="p2" placeholder="Producto clave">
+<textarea id="p3" placeholder="Qué NO harías"></textarea>
+<textarea id="p4" placeholder="Impacto"></textarea>
+<textarea id="p5" placeholder="IA"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
-<!-- YAEL -->
 <div id="yael" class="card hidden">
 <h3>🖥️ Infraestructura</h3>
-
-<p><b>Decisión:</b> Compra / Nube / Renta</p>
-<input id="y1">
-
-<p><b>Justificación:</b></p>
-<textarea id="y2"></textarea>
-
-<p><b>Reducción de fallas:</b></p>
-<textarea id="y3"></textarea>
-
-<p><b>Costo estimado:</b></p>
-<input id="y4">
-
-<p><b>IA:</b></p>
-<textarea id="y5"></textarea>
-
+<input id="y1" placeholder="Decisión (nube/renta/compra)">
+<textarea id="y2" placeholder="Justificación"></textarea>
+<textarea id="y3" placeholder="Reducción fallas"></textarea>
+<input id="y4" placeholder="Costo">
+<textarea id="y5" placeholder="IA"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
-<!-- JOHAN -->
 <div id="johan" class="card hidden">
 <h3>🔐 Seguridad</h3>
-
-<p><b>Riesgo principal:</b></p>
-<input id="j1">
-
-<p><b>Solución:</b></p>
-<textarea id="j2"></textarea>
-
-<p><b>Respaldo:</b></p>
-<textarea id="j3"></textarea>
-
-<p><b>Seguro:</b></p>
-<textarea id="j4"></textarea>
-
-<p><b>IA:</b></p>
-<textarea id="j5"></textarea>
-
+<input id="j1" placeholder="Riesgo">
+<textarea id="j2" placeholder="Solución"></textarea>
+<textarea id="j3" placeholder="Respaldo"></textarea>
+<textarea id="j4" placeholder="Seguro"></textarea>
+<textarea id="j5" placeholder="IA"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
-<!-- CRISIS -->
 <div class="card">
 <h3>⚠️ Crisis</h3>
-<p>Caída total del sistema en hora pico</p>
-
-<textarea id="crisis" placeholder="Respuesta inmediata + recuperación + costo"></textarea>
-
+<textarea id="crisis" placeholder="Respuesta y costo"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
-<!-- EXPORT -->
+<div class="card">
+<h3>🧩 Integración Final</h3>
+<textarea id="f1" placeholder="Propuesta integral"></textarea>
+<textarea id="f2" placeholder="Decisión clave"></textarea>
+<textarea id="f3" placeholder="Impacto global"></textarea>
+<textarea id="f4" placeholder="Riesgos"></textarea>
+<textarea id="f5" placeholder="Defensa"></textarea>
+<button onclick="guardar()">Guardar</button>
+</div>
+
 <div class="card">
 <h3>📤 Entrega</h3>
-<button onclick="exportar()">Descargar evidencia</button>
+
+<button onclick="verificar()">Verificar</button>
+<p id="resultado"></p>
+
+<button onclick="exportar()">Descargar</button>
 
 <br><br>
 
 <a href="mailto:TU_CORREO@ejemplo.com">
 <button>Enviar correo</button>
 </a>
+
 </div>
 
 </div>
 
 <script>
+
 function cargarRol(){
-let rol = document.getElementById("rol").value;
+let rol=document.getElementById("rol").value;
 document.querySelectorAll(".card").forEach(c=>{
 if(c.id) c.classList.add("hidden");
 });
@@ -194,7 +154,7 @@ alert("Guardado");
 
 function cargarDatos(){
 document.querySelectorAll("textarea,input").forEach(t=>{
-t.value = localStorage.getItem(t.id)||"";
+t.value=localStorage.getItem(t.id)||"";
 });
 actualizar();
 }
@@ -208,17 +168,49 @@ if(t.value.trim()!="") llenos++;
 document.getElementById("barra").style.width=(llenos/total*100)+"%";
 }
 
+function verificar(){
+let campos=document.querySelectorAll("textarea,input");
+let faltantes=0;
+
+campos.forEach(c=>{
+if(c.value.trim().length<20){
+c.style.border="2px solid red";
+faltantes++;
+}else{
+c.style.border="1px solid #ccc";
+}
+});
+
+let r=document.getElementById("resultado");
+
+if(faltantes>0){
+r.innerHTML="❌ Faltan "+faltantes+" campos";
+r.className="warning";
+}else{
+r.innerHTML="✅ Completo";
+r.className="success";
+}
+}
+
 function exportar(){
+let r=document.getElementById("resultado").innerText;
+if(!r.includes("Completo")){
+alert("Primero verifica");
+return;
+}
+
 let data={};
 document.querySelectorAll("textarea,input").forEach(t=>{
 data[t.id]=t.value;
 });
+
 let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
 let a=document.createElement("a");
 a.href=URL.createObjectURL(blob);
-a.download="evidencia.json";
+a.download="proyecto.json";
 a.click();
 }
+
 </script>
 
 </body>
