@@ -18,6 +18,7 @@ select {width:100%; padding:10px; border-radius:6px;}
 .bar {height:10px; background:#16a34a; width:0%;}
 .warning {color:red;}
 .success {color:green;}
+.lock {background:#ddd; cursor:not-allowed;}
 </style>
 </head>
 
@@ -25,30 +26,31 @@ select {width:100%; padding:10px; border-radius:6px;}
 
 <header>
 <h2>Proyecto Integrador: Unidad Informática</h2>
-<p>Simulación profesional con decisiones reales</p>
+<p>Simulación profesional con toma de decisiones reales</p>
 </header>
 
 <div class="container">
 
+<!-- INSTRUCCIONES -->
 <div class="card">
 <h3>📘 Instrucciones</h3>
 <ul>
 <li>Responde con decisiones reales, no teoría</li>
-<li>Usa los datos del caso</li>
+<li>Usa datos del caso</li>
 <li>Justifica todo</li>
-<li>Usa IA de forma crítica</li>
+<li>Usa IA críticamente</li>
 </ul>
 
 <h3>📊 Caso LogiMex</h3>
 <p>120 empleados | 95 PCs | 6 servidores</p>
-<p>3,500 pedidos diarios</p>
-<p>$85,000 MXN pérdida por hora</p>
+<p>3,500 pedidos diarios | $85,000 pérdida/hora</p>
 <p>Presupuesto: $1,200,000 MXN</p>
 
-<h3>🎓 Aprobación</h3>
-<p>El proyecto debe ser viable, integrado y justificar decisiones</p>
+<h3>🔁 Interacción obligatoria</h3>
+<p>Debes evaluar a un compañero antes de avanzar a la integración final</p>
 </div>
 
+<!-- SELECTOR -->
 <select id="rol" onchange="cargarRol()">
 <option value="">Selecciona tu rol</option>
 <option value="sebastian">Sebastián - Estrategia</option>
@@ -59,6 +61,7 @@ select {width:100%; padding:10px; border-radius:6px;}
 
 <div class="progress"><div class="bar" id="barra"></div></div>
 
+<!-- ROLES -->
 <div id="sebastian" class="card hidden">
 <h3>🎯 Estrategia</h3>
 <input id="s1" placeholder="Problema principal">
@@ -81,7 +84,7 @@ select {width:100%; padding:10px; border-radius:6px;}
 
 <div id="yael" class="card hidden">
 <h3>🖥️ Infraestructura</h3>
-<input id="y1" placeholder="Decisión (nube/renta/compra)">
+<input id="y1" placeholder="Decisión nube/renta/compra">
 <textarea id="y2" placeholder="Justificación"></textarea>
 <textarea id="y3" placeholder="Reducción fallas"></textarea>
 <input id="y4" placeholder="Costo">
@@ -99,29 +102,47 @@ select {width:100%; padding:10px; border-radius:6px;}
 <button onclick="guardar()">Guardar</button>
 </div>
 
+<!-- VALIDACION CRUZADA -->
+<div class="card">
+<h3>🔁 Validación Cruzada</h3>
+<p>Evalúa a tu compañero asignado</p>
+
+<textarea id="val1" placeholder="Errores detectados (mínimo 2)"></textarea>
+<textarea id="val2" placeholder="Decisiones poco realistas"></textarea>
+<textarea id="val3" placeholder="Recomendaciones"></textarea>
+
+<button onclick="guardar()">Guardar</button>
+</div>
+
+<!-- CRISIS -->
 <div class="card">
 <h3>⚠️ Crisis</h3>
 <textarea id="crisis" placeholder="Respuesta y costo"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
-<div class="card">
+<!-- INTEGRACION -->
+<div class="card" id="integracion">
 <h3>🧩 Integración Final</h3>
+<p class="warning">Se desbloquea después de la validación cruzada</p>
+
 <textarea id="f1" placeholder="Propuesta integral"></textarea>
 <textarea id="f2" placeholder="Decisión clave"></textarea>
 <textarea id="f3" placeholder="Impacto global"></textarea>
 <textarea id="f4" placeholder="Riesgos"></textarea>
 <textarea id="f5" placeholder="Defensa"></textarea>
+
 <button onclick="guardar()">Guardar</button>
 </div>
 
+<!-- ENTREGA -->
 <div class="card">
 <h3>📤 Entrega</h3>
 
-<button onclick="verificar()">Verificar</button>
+<button onclick="verificar()">Verificar actividad</button>
 <p id="resultado"></p>
 
-<button onclick="exportar()">Descargar</button>
+<button onclick="exportar()">Descargar evidencia</button>
 
 <br><br>
 
@@ -138,7 +159,7 @@ select {width:100%; padding:10px; border-radius:6px;}
 function cargarRol(){
 let rol=document.getElementById("rol").value;
 document.querySelectorAll(".card").forEach(c=>{
-if(c.id) c.classList.add("hidden");
+if(c.id && c.id!="integracion") c.classList.add("hidden");
 });
 if(rol) document.getElementById(rol).classList.remove("hidden");
 cargarDatos();
@@ -162,10 +183,27 @@ actualizar();
 function actualizar(){
 let total=document.querySelectorAll("textarea,input").length;
 let llenos=0;
+
 document.querySelectorAll("textarea,input").forEach(t=>{
 if(t.value.trim()!="") llenos++;
 });
+
 document.getElementById("barra").style.width=(llenos/total*100)+"%";
+
+/* desbloqueo integración */
+let val1=localStorage.getItem("val1")||"";
+let val2=localStorage.getItem("val2")||"";
+let val3=localStorage.getItem("val3")||"";
+
+let integracion=document.getElementById("integracion");
+
+if(val1.length>20 && val2.length>20 && val3.length>20){
+integracion.style.opacity="1";
+integracion.style.pointerEvents="auto";
+}else{
+integracion.style.opacity="0.5";
+integracion.style.pointerEvents="none";
+}
 }
 
 function verificar(){
@@ -187,19 +225,21 @@ if(faltantes>0){
 r.innerHTML="❌ Faltan "+faltantes+" campos";
 r.className="warning";
 }else{
-r.innerHTML="✅ Completo";
+r.innerHTML="✅ Actividad completa";
 r.className="success";
 }
 }
 
 function exportar(){
 let r=document.getElementById("resultado").innerText;
-if(!r.includes("Completo")){
-alert("Primero verifica");
+
+if(!r.includes("completa")){
+alert("Primero completa la actividad");
 return;
 }
 
 let data={};
+
 document.querySelectorAll("textarea,input").forEach(t=>{
 data[t.id]=t.value;
 });
@@ -207,7 +247,7 @@ data[t.id]=t.value;
 let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
 let a=document.createElement("a");
 a.href=URL.createObjectURL(blob);
-a.download="proyecto.json";
+a.download="proyecto_integrador.json";
 a.click();
 }
 
