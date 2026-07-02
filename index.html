@@ -26,26 +26,26 @@ button { background:#1e3a8a; color:white; padding:10px; border:none; margin-top:
 
 <div class="container">
 
-<!-- CASO COMPLETO -->
+<!-- CASO -->
 <div class="card">
 <h3>Caso: LogiMex Inteligente S.A. de C.V.</h3>
 
-<p><b>Giro:</b> Logística nacional</p>
+<p><b>Giro:</b> Empresa de logística nacional</p>
 <p><b>Operación:</b> 3,500 pedidos diarios</p>
-<p><b>Sucursales:</b> 4 centros</p>
+<p><b>Sucursales:</b> 4 centros de distribución</p>
 
-<p><b>Infraestructura:</b></p>
+<p><b>Infraestructura actual:</b></p>
 <ul>
-<li>95 computadoras</li>
+<li>95 computadoras operativas</li>
 <li>6 servidores sin redundancia</li>
 <li>ERP obsoleto</li>
 <li>Respaldos cada 48 horas</li>
 </ul>
 
-<p><b>Problemas:</b></p>
+<p><b>Problemas detectados:</b></p>
 <ul>
-<li>Caídas 3 veces por semana</li>
-<li>Pérdida de datos reciente</li>
+<li>Caídas del sistema 3 veces por semana</li>
+<li>Pérdida reciente de datos</li>
 <li>Saturación de red</li>
 <li>Sin políticas de seguridad</li>
 </ul>
@@ -53,75 +53,75 @@ button { background:#1e3a8a; color:white; padding:10px; border:none; margin-top:
 <p><b>Impacto:</b></p>
 <ul>
 <li>$85,000 MXN por hora de caída</li>
-<li>Clientes en riesgo</li>
+<li>Clientes en riesgo de cancelación</li>
 <li>Retrasos operativos</li>
 </ul>
 
-<p><b>Presupuesto:</b> $1,200,000 MXN</p>
-<p><b>Advertencia:</b> Un fallo más = pérdida de contrato clave</p>
+<p><b>Restricción:</b> Presupuesto máximo $1,200,000 MXN</p>
+<p><b>Situación crítica:</b> Un fallo más implica pérdida del contrato principal</p>
 </div>
 
-<!-- ROLES -->
+<!-- SELECT ROL -->
 <select id="rol" onchange="cargarRol()">
-<option value="">Selecciona rol</option>
-<option value="sebastian">Estrategia</option>
-<option value="partida">Negocio</option>
-<option value="yael">Infraestructura</option>
-<option value="johan">Seguridad</option>
-<option value="omar">Omar - Integración</option>
+<option value="">Selecciona tu rol</option>
+<option value="sebastian">Sebastián – Director de Estrategia</option>
+<option value="partida">Pedro Partida – Analista de Negocio</option>
+<option value="yael">Pedro Yael – Arquitecto de Infraestructura</option>
+<option value="johan">Johan – Responsable de Seguridad</option>
+<option value="omar">Omar Martínez – Gestor de Operaciones e Integración</option>
 </select>
 
 <!-- ESTRATEGIA -->
 <div id="sebastian" class="card hidden">
-<h3>Estrategia</h3>
-<input id="s1" placeholder="Problema principal del caso">
-<input id="s2" placeholder="Objetivo medible">
-<textarea id="s3" placeholder="Impacto económico"></textarea>
-<textarea id="s4" placeholder="Organización de la unidad informática"></textarea>
-<textarea id="s5" placeholder="Uso de IA (prompt + análisis)"></textarea>
+<h3>Sebastián – Director de Estrategia</h3>
+<input id="s1" placeholder="Define el problema principal usando datos del caso">
+<input id="s2" placeholder="Establece un objetivo medible (ej. reducir fallas 80%)">
+<textarea id="s3" placeholder="Calcula el impacto económico basado en $85,000 por hora"></textarea>
+<textarea id="s4" placeholder="Define cómo se organizará la unidad informática"></textarea>
+<textarea id="s5" placeholder="Uso de IA: prompt, respuesta y análisis crítico"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
 <!-- NEGOCIO -->
 <div id="partida" class="card hidden">
-<h3>Negocio</h3>
-<textarea id="p1" placeholder="Impacto en la operación"></textarea>
-<textarea id="p3" placeholder="Decisión costo-beneficio"></textarea>
+<h3>Pedro Partida – Analista de Negocio</h3>
+<textarea id="p1" placeholder="Explica cómo afecta el problema a la operación"></textarea>
+<textarea id="p3" placeholder="Analiza costo-beneficio de la solución"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
 <!-- INFRA -->
 <div id="yael" class="card hidden">
-<h3>Infraestructura</h3>
-<input id="y1" placeholder="Infraestructura propuesta">
-<textarea id="y2" placeholder="Justificación técnica"></textarea>
+<h3>Pedro Yael – Arquitecto de Infraestructura</h3>
+<input id="y1" placeholder="Propón la nueva infraestructura">
+<textarea id="y2" placeholder="Justifica la solución técnica"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
 <!-- SEGURIDAD -->
 <div id="johan" class="card hidden">
-<h3>Seguridad</h3>
-<input id="j1" placeholder="Riesgo principal">
-<textarea id="j2" placeholder="Controles de seguridad"></textarea>
+<h3>Johan – Responsable de Seguridad</h3>
+<input id="j1" placeholder="Identifica el riesgo principal">
+<textarea id="j2" placeholder="Define controles de seguridad"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
-<!-- VALIDACION CRUZADA -->
+<!-- VALIDACION -->
 <div class="card">
 <h3>Validación Cruzada</h3>
-<textarea id="v1" placeholder="Errores detectados"></textarea>
+<textarea id="v1" placeholder="Errores detectados en el trabajo del compañero"></textarea>
 <textarea id="v2" placeholder="Mejoras propuestas"></textarea>
-<textarea id="v3" placeholder="Evaluación crítica"></textarea>
+<textarea id="v3" placeholder="Evaluación crítica basada en el caso"></textarea>
 <button onclick="guardar()">Guardar validación</button>
 </div>
 
 <!-- OMAR -->
 <div id="omar" class="card hidden">
-<h3>Omar - Auditor del Sistema</h3>
-<textarea id="o1" placeholder="Errores del sistema"></textarea>
-<textarea id="o2" placeholder="Conflictos entre áreas"></textarea>
-<textarea id="o3" placeholder="Riesgos críticos"></textarea>
-<textarea id="o4" placeholder="Decisión final justificada"></textarea>
+<h3>Omar Martínez – Gestor de Operaciones e Integración</h3>
+<textarea id="o1" placeholder="Detecta errores del sistema"></textarea>
+<textarea id="o2" placeholder="Identifica conflictos entre áreas"></textarea>
+<textarea id="o3" placeholder="Define riesgos críticos"></textarea>
+<textarea id="o4" placeholder="Emite una decisión final justificada"></textarea>
 <label><input type="checkbox" id="o5"> Aprobar sistema</label>
 <button onclick="validarOmar()">Validar</button>
 </div>
@@ -129,23 +129,21 @@ button { background:#1e3a8a; color:white; padding:10px; border:none; margin-top:
 <!-- CRISIS -->
 <div class="card">
 <h3>Simulación de Crisis</h3>
-<p>El sistema falla 2 horas en horario pico</p>
-<textarea id="c1" placeholder="Acciones inmediatas"></textarea>
-<textarea id="c2" placeholder="Solución a corto plazo"></textarea>
-<textarea id="c3" placeholder="Cambio estratégico"></textarea>
+<p>El sistema falla durante 2 horas en horario pico</p>
+<textarea id="c1" placeholder="¿Qué haces en las primeras 2 horas?"></textarea>
+<textarea id="c2" placeholder="¿Cómo evitas que vuelva a pasar?"></textarea>
+<textarea id="c3" placeholder="¿Qué decisión estratégica cambia?"></textarea>
 <button onclick="guardar()">Guardar crisis</button>
 </div>
 
 <!-- INTEGRACION -->
 <div id="integracion" class="card locked">
-<h3>Integración Final</h3>
-
-<textarea id="f1" placeholder="Integra todas las propuestas en una solución única"></textarea>
-<textarea id="f2" placeholder="Decisión crítica del proyecto"></textarea>
-<textarea id="f3" placeholder="Impacto global en la empresa"></textarea>
-<textarea id="f4" placeholder="Riesgos y mitigación"></textarea>
-<textarea id="f5" placeholder="Defensa ante directivos"></textarea>
-
+<h3>Integración Final del Sistema</h3>
+<textarea id="f1" placeholder="Integra estrategia, negocio, infraestructura y seguridad en una sola solución"></textarea>
+<textarea id="f2" placeholder="Define la decisión crítica del proyecto"></textarea>
+<textarea id="f3" placeholder="Calcula el impacto global en la empresa"></textarea>
+<textarea id="f4" placeholder="Identifica riesgos y cómo mitigarlos"></textarea>
+<textarea id="f5" placeholder="Defiende la propuesta ante directivos"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
@@ -185,7 +183,6 @@ actualizar();
 }
 
 function actualizar(){
-
 let validacionOK =
 (localStorage.getItem("v1")||"").length>10 &&
 (localStorage.getItem("v2")||"").length>10 &&
@@ -193,7 +190,8 @@ let validacionOK =
 
 let omarOK = localStorage.getItem("omar_aprobado")==="true";
 
-document.getElementById("integracion").classList.toggle("locked", !(validacionOK && omarOK));
+document.getElementById("integracion")
+.classList.toggle("locked", !(validacionOK && omarOK));
 }
 
 function validarOmar(){
@@ -221,19 +219,8 @@ alert("Debes aprobar el sistema");
 return;
 }
 
-let score=0;
-["s1","s2","s3","p1","p3","y1","y2","j1","j2"].forEach(id=>{
-if((localStorage.getItem(id)||"").length>5) score++;
-});
-
-if(score<6){
-alert("Sistema rechazado por inconsistencias");
-localStorage.setItem("omar_aprobado","false");
-return;
-}
-
 localStorage.setItem("omar_aprobado","true");
-alert("Sistema aprobado");
+alert("Sistema aprobado correctamente");
 actualizar();
 }
 
