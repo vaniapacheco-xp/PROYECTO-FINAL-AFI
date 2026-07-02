@@ -8,7 +8,7 @@
 <style>
 body { font-family: Arial; margin:0; background:#f4f6f9; }
 header { background:#1e3a8a; color:white; padding:20px; text-align:center; }
-.container { max-width:1000px; margin:auto; padding:20px; }
+.container { max-width:1100px; margin:auto; padding:20px; }
 .card { background:white; padding:20px; margin:15px 0; border-radius:10px; }
 textarea,input,select { width:100%; padding:10px; margin-top:8px; }
 button { background:#1e3a8a; color:white; padding:10px; border:none; margin-top:10px; cursor:pointer; }
@@ -21,35 +21,72 @@ button { background:#1e3a8a; color:white; padding:10px; border:none; margin-top:
 
 <header>
 <h2>Proyecto Integrador: Unidad Informática</h2>
+<p>Simulación profesional con toma de decisiones reales</p>
 </header>
 
 <div class="container">
 
+<!-- CASO COMPLETO -->
+<div class="card">
+<h3>Caso: LogiMex Inteligente S.A. de C.V.</h3>
+
+<p><b>Giro:</b> Logística nacional</p>
+<p><b>Operación:</b> 3,500 pedidos diarios</p>
+<p><b>Sucursales:</b> 4 centros</p>
+
+<p><b>Infraestructura:</b></p>
+<ul>
+<li>95 computadoras</li>
+<li>6 servidores sin redundancia</li>
+<li>ERP obsoleto</li>
+<li>Respaldos cada 48 horas</li>
+</ul>
+
+<p><b>Problemas:</b></p>
+<ul>
+<li>Caídas 3 veces por semana</li>
+<li>Pérdida de datos reciente</li>
+<li>Saturación de red</li>
+<li>Sin políticas de seguridad</li>
+</ul>
+
+<p><b>Impacto:</b></p>
+<ul>
+<li>$85,000 MXN por hora de caída</li>
+<li>Clientes en riesgo</li>
+<li>Retrasos operativos</li>
+</ul>
+
+<p><b>Presupuesto:</b> $1,200,000 MXN</p>
+<p><b>Advertencia:</b> Un fallo más = pérdida de contrato clave</p>
+</div>
+
+<!-- ROLES -->
 <select id="rol" onchange="cargarRol()">
 <option value="">Selecciona rol</option>
 <option value="sebastian">Estrategia</option>
 <option value="partida">Negocio</option>
 <option value="yael">Infraestructura</option>
 <option value="johan">Seguridad</option>
-<option value="omar">Omar - Auditor</option>
+<option value="omar">Omar - Integración</option>
 </select>
 
 <!-- ESTRATEGIA -->
 <div id="sebastian" class="card hidden">
 <h3>Estrategia</h3>
-<input id="s1" placeholder="Problema del caso">
+<input id="s1" placeholder="Problema principal del caso">
 <input id="s2" placeholder="Objetivo medible">
 <textarea id="s3" placeholder="Impacto económico"></textarea>
-<textarea id="s4" placeholder="Organización de roles"></textarea>
-<textarea id="s5" placeholder="Uso de IA"></textarea>
+<textarea id="s4" placeholder="Organización de la unidad informática"></textarea>
+<textarea id="s5" placeholder="Uso de IA (prompt + análisis)"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
 <!-- NEGOCIO -->
 <div id="partida" class="card hidden">
 <h3>Negocio</h3>
-<textarea id="p1" placeholder="Impacto en negocio"></textarea>
-<textarea id="p3" placeholder="Costo-beneficio"></textarea>
+<textarea id="p1" placeholder="Impacto en la operación"></textarea>
+<textarea id="p3" placeholder="Decisión costo-beneficio"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
@@ -73,30 +110,42 @@ button { background:#1e3a8a; color:white; padding:10px; border:none; margin-top:
 <div class="card">
 <h3>Validación Cruzada</h3>
 <textarea id="v1" placeholder="Errores detectados"></textarea>
-<textarea id="v2" placeholder="Mejoras"></textarea>
+<textarea id="v2" placeholder="Mejoras propuestas"></textarea>
 <textarea id="v3" placeholder="Evaluación crítica"></textarea>
 <button onclick="guardar()">Guardar validación</button>
 </div>
 
 <!-- OMAR -->
 <div id="omar" class="card hidden">
-<h3>Omar - Auditor</h3>
+<h3>Omar - Auditor del Sistema</h3>
 <textarea id="o1" placeholder="Errores del sistema"></textarea>
 <textarea id="o2" placeholder="Conflictos entre áreas"></textarea>
 <textarea id="o3" placeholder="Riesgos críticos"></textarea>
-<textarea id="o4" placeholder="Recomendación"></textarea>
+<textarea id="o4" placeholder="Decisión final justificada"></textarea>
 <label><input type="checkbox" id="o5"> Aprobar sistema</label>
 <button onclick="validarOmar()">Validar</button>
+</div>
+
+<!-- CRISIS -->
+<div class="card">
+<h3>Simulación de Crisis</h3>
+<p>El sistema falla 2 horas en horario pico</p>
+<textarea id="c1" placeholder="Acciones inmediatas"></textarea>
+<textarea id="c2" placeholder="Solución a corto plazo"></textarea>
+<textarea id="c3" placeholder="Cambio estratégico"></textarea>
+<button onclick="guardar()">Guardar crisis</button>
 </div>
 
 <!-- INTEGRACION -->
 <div id="integracion" class="card locked">
 <h3>Integración Final</h3>
-<textarea id="f1" placeholder="Solución integral"></textarea>
-<textarea id="f2" placeholder="Decisión final"></textarea>
-<textarea id="f3" placeholder="Impacto"></textarea>
-<textarea id="f4" placeholder="Riesgos"></textarea>
-<textarea id="f5" placeholder="Defensa"></textarea>
+
+<textarea id="f1" placeholder="Integra todas las propuestas en una solución única"></textarea>
+<textarea id="f2" placeholder="Decisión crítica del proyecto"></textarea>
+<textarea id="f3" placeholder="Impacto global en la empresa"></textarea>
+<textarea id="f4" placeholder="Riesgos y mitigación"></textarea>
+<textarea id="f5" placeholder="Defensa ante directivos"></textarea>
+
 <button onclick="guardar()">Guardar</button>
 </div>
 
@@ -137,33 +186,28 @@ actualizar();
 
 function actualizar(){
 
-let v1=(localStorage.getItem("v1")||"").length>10;
-let v2=(localStorage.getItem("v2")||"").length>10;
-let v3=(localStorage.getItem("v3")||"").length>10;
+let validacionOK =
+(localStorage.getItem("v1")||"").length>10 &&
+(localStorage.getItem("v2")||"").length>10 &&
+(localStorage.getItem("v3")||"").length>10;
 
-let validacionOK = v1 && v2 && v3;
 let omarOK = localStorage.getItem("omar_aprobado")==="true";
 
-/* BLOQUEO REAL */
-let desbloquear = validacionOK && omarOK;
-
-document.getElementById("integracion").classList.toggle("locked", !desbloquear);
+document.getElementById("integracion").classList.toggle("locked", !(validacionOK && omarOK));
 }
 
-/* OMAR INTELIGENTE */
 function validarOmar(){
 
-// primero exige validación cruzada
-let v1=(localStorage.getItem("v1")||"").length>10;
-let v2=(localStorage.getItem("v2")||"").length>10;
-let v3=(localStorage.getItem("v3")||"").length>10;
+let validacionOK =
+(localStorage.getItem("v1")||"").length>10 &&
+(localStorage.getItem("v2")||"").length>10 &&
+(localStorage.getItem("v3")||"").length>10;
 
-if(!(v1 && v2 && v3)){
-alert("No puedes validar sin validación cruzada previa");
+if(!validacionOK){
+alert("Primero realiza validación cruzada");
 return;
 }
 
-// campos Omar
 let campos=["o1","o2","o3","o4"];
 for(let c of campos){
 if((document.getElementById(c).value||"").length<10){
@@ -177,7 +221,6 @@ alert("Debes aprobar el sistema");
 return;
 }
 
-// coherencia
 let score=0;
 ["s1","s2","s3","p1","p3","y1","y2","j1","j2"].forEach(id=>{
 if((localStorage.getItem(id)||"").length>5) score++;
@@ -190,7 +233,7 @@ return;
 }
 
 localStorage.setItem("omar_aprobado","true");
-alert("Sistema aprobado correctamente");
+alert("Sistema aprobado");
 actualizar();
 }
 
