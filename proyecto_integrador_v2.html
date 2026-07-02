@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Proyecto Integrador TI</title>
+<style>
+body { font-family: Arial; margin:0; background:#f1f5f9; color:#1e293b;}
+header {background:#1e3a8a;color:white;padding:20px;text-align:center;}
+.container{max-width:1100px;margin:auto;padding:20px;}
+.card{background:white;padding:20px;margin:15px 0;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.08);}
+textarea,input,select{width:100%;padding:10px;margin-top:6px;box-sizing:border-box;border:1px solid #cbd5e1;border-radius:6px;font-family:inherit;}
+textarea{min-height:70px;}
+label.campo{display:block;margin-top:14px;font-weight:bold;font-size:14px;color:#334155;}
+button{background:#1e3a8a;color:white;padding:10px 16px;border:none;margin-top:14px;cursor:pointer;border-radius:6px;font-weight:bold;}
+button:hover{background:#16296b;}
+button.secundario{background:#64748b;}
+button.secundario:hover{background:#475569;}
+.hidden{display:none;}
+.locked{opacity:0.55;}
+.locked .bloqueo{display:block;}
+.bloqueo{display:none;background:#fef2f2;color:#b91c1c;padding:10px;border-radius:8px;font-weight:bold;margin-top:10px;}
+.timer {font-size:20px;color:#dc2626;font-weight:bold;}
+.stepper{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0;}
+.paso{flex:1;min-width:120px;padding:10px;text-align:center;border-radius:8px;background:#e2e8f0;font-size:13px;font-weight:bold;color:#475569;}
+.paso.activo{background:#1e3a8a;color:white;}
+.paso.hecho{background:#16a34a;color:white;}
+table{width:100%;border-collapse:collapse;margin-top:10px;}
+td,th{border:1px solid #cbd5e1;padding:8px;text-align:left;font-size:14px;}
+small.ayuda{display:block;color:#64748b;margin-top:4px;}
+.badge-ok{color:#16a34a;font-weight:bold;}
+.badge-falta{color:#dc2626;font-weight:bold;}
+</style>
+</head>
+<body>
+
+<header>
+<h2>Proyecto Integrador: Unidad Informática</h2>
+<p id="faseTexto"><b>Fase 1:</b> Desarrollo individual</p>
+<p class="timer" id="timer">40:00</p>
+</header>
+
+<div class="container">
+
+<!-- CASO -->
+<div class="card">
+<h3>Caso: LogiMex Inteligente S.A. de C.V.</h3>
+<p>3,500 pedidos diarios | $85,000 MXN por hora de caída</p>
+<p>Infraestructura: 95 equipos, 6 servidores sin redundancia</p>
+<p>Problema: fallas constantes y pérdida de datos</p>
+<p>Presupuesto: $1,200,000 MXN</p>
+</div>
+
+<!-- STEPPER -->
+<div class="card">
+<h3>Progreso de la actividad</h3>
+<div class="stepper" id="stepper"></div>
+</div>
+
+<!-- ===================== FASE 1 ===================== -->
+<div class="card" id="panel-fase1">
+<h3>Fase 1 · Desarrollo individual (40 min)</h3>
+<p>Selecciona tu rol y resuelve <b>todos</b> los apartados. Debes justificar cada decisión con datos del caso e incluir tu uso de Inteligencia Artificial (prompt, respuesta y análisis crítico).</p>
+
+<select id="rol" onchange="cargarRol()">
+<option value="">Selecciona tu rol</option>
+<option value="sebastian">Sebastián – Director de Estrategia</option>
+<option value="partida">Pedro Partida – Analista de Negocio</option>
+<option value="yael">Pedro Yael – Infraestructura</option>
+<option value="johan">Johan – Seguridad</option>
+<option value="omar">Omar Martínez – Integración</option>
+</select>
+
+<div id="camposRol"></div>
+
+<div id="accionesFase1" class="hidden">
+<button onclick="guardar()">Guardar avance</button>
+<button onclick="exportar()">Descargar JSON</button>
+<button onclick="avanzarFase(2)">Avanzar a Fase 2 →</button>
+<small class="ayuda">Para avanzar necesitas completar todos los campos y haber descargado tu archivo JSON.</small>
+</div>
+</div>
+
+<!-- ===================== FASE 2 ===================== -->
+<div class="card locked" id="panel-fase2">
+<div class="bloqueo">Completa la Fase 1 (todos los campos + descarga del JSON) para desbloquear esta fase.</div>
+<h3>Fase 2 · Intercambio de información</h3>
+<table>
+<tr><th>Entrega</th><th>Recibe</th></tr>
+<tr><td>Sebastián</td><td>Pedro Partida</td></tr>
+<tr><td>Pedro Partida</td><td>Pedro Yael</td></tr>
+<tr><td>Pedro Yael</td><td>Johan</td></tr>
+<tr><td>Johan</td><td>Omar Martínez</td></tr>
+<tr><td>Omar Martínez</td><td>Sebastián</td></tr>
+</table>
+<p style="margin-top:14px;">Carga aquí el archivo JSON que te entregó tu compañero (según la tabla anterior).</p>
+<input type="file" id="fileInput" accept=".json">
+<button onclick="importarJSON()">Cargar JSON del compañero</button>
+<div id="accionesFase2" class="hidden">
+<button onclick="avanzarFase(3)">Avanzar a Fase 3 →</button>
+</div>
+</div>
+
+<!-- ===================== FASE 3 ===================== -->
+<div class="card locked" id="panel-fase3">
+<div class="bloqueo">Completa la Fase 2 (cargar el JSON del compañero) para desbloquear esta fase.</div>
+<h3>Fase 3 · Validación cruzada</h3>
+<p>Actúa como auditor externo del trabajo que cargaste. Identifica errores reales (no opiniones), propón mejoras viables y emite una evaluación crítica fundamentada.</p>
+<label class="campo">Nombre del compañero evaluado</label>
+<input id="v0" placeholder="Nombre">
+<label class="campo">Errores identificados (con evidencia, no opiniones)</label>
+<textarea id="v1" placeholder="Ej. La justificación no usa los datos del presupuesto..."></textarea>
+<label class="campo">Mejoras propuestas (viables y concretas)</label>
+<textarea id="v2" placeholder="Ej. Proponer un plan de redundancia con costo estimado..."></textarea>
+<label class="campo">Evaluación crítica fundamentada</label>
+<textarea id="v3" placeholder="Ej. La decisión es coherente pero falta cuantificar el ROI..."></textarea>
+<button onclick="guardar()">Guardar</button>
+<div id="accionesFase3" class="hidden">
+<button onclick="avanzarFase(4)">Avanzar a Fase 4 →</button>
+</div>
+</div>
+
+<!-- ===================== FASE 4 ===================== -->
+<div class="card locked" id="panel-fase4">
+<div class="bloqueo">Completa la Fase 3 (validación cruzada) para desbloquear esta fase.</div>
+<h3>Fase 4 · Integración y aprobación (rol Omar Martínez)</h3>
+<div id="omarAviso"></div>
+<div id="omarCampos" class="hidden">
+<label class="campo">Análisis del sistema completo</label>
+<textarea id="o1" placeholder="Analiza cómo encajan estrategia, negocio, infraestructura y seguridad"></textarea>
+<label class="campo">Inconsistencias detectadas entre áreas</label>
+<textarea id="o2" placeholder="Ej. Infraestructura propone gasto que excede el presupuesto de negocio..."></textarea>
+<label class="campo">Riesgos críticos evaluados</label>
+<textarea id="o3" placeholder="Ej. Riesgo de continuidad, riesgo financiero, riesgo de seguridad..."></textarea>
+<label class="campo">Decisión final</label>
+<select id="o4">
+<option value="">Selecciona</option>
+<option value="aprobado">Aprobar el sistema</option>
+<option value="rechazado">Rechazar / regresar a revisión</option>
+</select>
+<button onclick="guardar()">Guardar</button>
+<button onclick="validarOmar()">Validar decisión</button>
+</div>
+</div>
+
+<!-- ===================== FASE 5 ===================== -->
+<div class="card locked" id="panel-fase5">
+<div class="bloqueo">Esta fase se desbloquea solo cuando el sistema fue <b>aprobado</b> en la Fase 4 (o cuando importas el JSON de Omar con la aprobación).</div>
+<h3>Fase 5 · Integración final del equipo</h3>
+<p>Defiende la propuesta como si fuera presentada ante directivos.</p>
+<label class="campo">Solución global integrada</label>
+<textarea id="f1" placeholder="Une estrategia, negocio, infraestructura y seguridad en una sola propuesta"></textarea>
+<label class="campo">Justificación de la decisión principal</label>
+<textarea id="f2" placeholder="Por qué esta es la mejor alternativa frente a otras posibles"></textarea>
+<label class="campo">Impacto en la empresa</label>
+<textarea id="f3" placeholder="Impacto operativo, financiero y en el servicio al cliente"></textarea>
+<label class="campo">Riesgos y mitigaciones</label>
+<textarea id="f4" placeholder="Riesgos residuales y cómo se mitigan"></textarea>
+<button onclick="guardar()">Guardar</button>
+<button onclick="exportar()">Descargar JSON final</button>
+</div>
+
+<!-- MODO DOCENTE -->
+<div class="card">
+<h3>Modo docente</h3>
+<input type="file" id="docenteFile" accept=".json">
+<button onclick="cargarAlumno()">Cargar trabajo del alumno</button>
+<p id="estado"></p>
+<div id="reporteDocente"></div>
+<label class="campo">Calificación</label>
+<input id="calificacion" placeholder="Calificación">
+<label class="campo">Observaciones</label>
+<textarea id="comentarios" placeholder="Observaciones"></textarea>
+</div>
+
+</div>
+
+<script>
+// ---------- CONFIGURACIÓN DE ROLES ----------
+const ROLES = {
+sebastian: { label:"Sebastián – Director de Estrategia", fields:[
+  {id:"s1",tipo:"input",label:"Problema estratégico identificado"},
+  {id:"s2",tipo:"textarea",label:"Objetivo estratégico"},
+  {id:"s3",tipo:"textarea",label:"Decisión estratégica propuesta"},
+  {id:"s4",tipo:"textarea",label:"Justificación basada en los datos del caso"},
+  {id:"s5",tipo:"textarea",label:"Prompt utilizado en la IA"},
+  {id:"s6",tipo:"textarea",label:"Respuesta obtenida de la IA"},
+  {id:"s7",tipo:"textarea",label:"Análisis crítico de la respuesta de la IA"}
+]},
+partida: { label:"Pedro Partida – Analista de Negocio", fields:[
+  {id:"p1",tipo:"textarea",label:"Impacto económico del problema"},
+  {id:"p2",tipo:"textarea",label:"Análisis costo-beneficio"},
+  {id:"p3",tipo:"textarea",label:"Decisión de negocio propuesta"},
+  {id:"p4",tipo:"textarea",label:"Justificación con datos financieros del caso"},
+  {id:"p5",tipo:"textarea",label:"Prompt utilizado en la IA"},
+  {id:"p6",tipo:"textarea",label:"Respuesta obtenida de la IA"},
+  {id:"p7",tipo:"textarea",label:"Análisis crítico de la respuesta de la IA"}
+]},
+yael: { label:"Pedro Yael – Infraestructura", fields:[
+  {id:"y1",tipo:"textarea",label:"Solución técnica propuesta"},
+  {id:"y2",tipo:"textarea",label:"Especificaciones técnicas (equipos, redundancia, presupuesto)"},
+  {id:"y3",tipo:"textarea",label:"Justificación técnica"},
+  {id:"y4",tipo:"textarea",label:"Prompt utilizado en la IA"},
+  {id:"y5",tipo:"textarea",label:"Respuesta obtenida de la IA"},
+  {id:"y6",tipo:"textarea",label:"Análisis crítico de la respuesta de la IA"}
+]},
+johan: { label:"Johan – Seguridad", fields:[
+  {id:"j1",tipo:"textarea",label:"Riesgo principal identificado"},
+  {id:"j2",tipo:"textarea",label:"Plan de mitigación"},
+  {id:"j3",tipo:"textarea",label:"Justificación del riesgo"},
+  {id:"j4",tipo:"textarea",label:"Prompt utilizado en la IA"},
+  {id:"j5",tipo:"textarea",label:"Respuesta obtenida de la IA"},
+  {id:"j6",tipo:"textarea",label:"Análisis crítico de la respuesta de la IA"}
+]},
+omar: { label:"Omar Martínez – Integración", fields:[
+  {id:"om1",tipo:"textarea",label:"Visión general de integración del sistema"},
+  {id:"om2",tipo:"textarea",label:"Justificación basada en datos del caso"},
+  {id:"om3",tipo:"textarea",label:"Prompt utilizado en la IA"},
+  {id:"om4",tipo:"textarea",label:"Respuesta obtenida de la IA"},
+  {id:"om5",tipo:"textarea",label:"Análisis crítico de la respuesta de la IA"}
+]}
+};
+
+const MIN_TEXTAREA = 15;
+
+function cargarRol(){
+let rol = document.getElementById("rol").value;
+let cont = document.getElementById("camposRol");
+cont.innerHTML = "";
+document.getElementById("accionesFase1").classList.add("hidden");
+if(!rol){ return; }
+localStorage.setItem("rol", rol);
+
+let conf = ROLES[rol];
+let h = "<h4>"+conf.label+"</h4>";
+conf.fields.forEach(f=>{
+h += '<label class="campo">'+f.label+'</label>';
+if(f.tipo==="input"){
+h += '<input id="'+f.id+'" oninput="revisarFase1()">';
+} else {
+h += '<textarea id="'+f.id+'" oninput="revisarFase1()"></textarea>';
+}
+});
+cont.innerHTML = h;
+
+// restaurar valores guardados
+conf.fields.forEach(f=>{
+let v = localStorage.getItem(f.id);
+if(v!==null){ document.getElementById(f.id).value = v; }
+});
+
+document.getElementById("accionesFase1").classList.remove("hidden");
+revisarFase1();
+}
+
+function revisarFase1(){
+let rol = document.getElementById("rol").value;
+if(!rol) return false;
+let conf = ROLES[rol];
+let completo = true;
+conf.fields.forEach(f=>{
+let el = document.getElementById(f.id);
+if(!el) { completo=false; return; }
+let val = (el.value||"").trim();
+let minimo = f.tipo==="input" ? 3 : MIN_TEXTAREA;
+if(val.length < minimo) completo = false;
+});
+return completo;
+}
+
+// ---------- GUARDAR / EXPORTAR / IMPORTAR ----------
+function guardar(){
+document.querySelectorAll("textarea,input,select").forEach(t=>{
+if(t.id==="fileInput"||t.id==="docenteFile") return;
+localStorage.setItem(t.id, t.type==="checkbox"?t.checked:t.value);
+});
+alert("Guardado");
+}
+
+function exportar(){
+document.querySelectorAll("textarea,input,select").forEach(t=>{
+if(t.id==="fileInput"||t.id==="docenteFile") return;
+localStorage.setItem(t.id, t.type==="checkbox"?t.checked:t.value);
+});
+let data = {};
+for(let i=0;i<localStorage.length;i++){
+let k = localStorage.key(i);
+data[k] = localStorage.getItem(k);
+}
+localStorage.setItem("descargado","true");
+let blob = new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+let a = document.createElement("a");
+a.href = URL.createObjectURL(blob);
+a.download = "proyecto_"+(localStorage.getItem("rol")||"alumno")+".json";
+a.click();
+actualizarStepper();
+}
+
+function importarJSON(){
+let file = document.getElementById("fileInput").files[0];
+if(!file){ alert("Selecciona un archivo"); return; }
+let reader = new FileReader();
+reader.onload = e=>{
+let data = JSON.parse(e.target.result);
+for(let k in data){ localStorage.setItem(k, data[k]); }
+localStorage.setItem("companeroCargado","true");
+alert("Archivo del compañero cargado correctamente");
+document.getElementById("accionesFase2").classList.remove("hidden");
+actualizarStepper();
+};
+reader.readAsText(file);
+}
+
+// ---------- FASE 4 (OMAR) ----------
+function mostrarPanelOmar(){
+let rol = localStorage.getItem("rol");
+let aviso = document.getElementById("omarAviso");
+let campos = document.getElementById("omarCampos");
+if(rol === "omar"){
+aviso.innerHTML = "";
+campos.classList.remove("hidden");
+["o1","o2","o3","o4"].forEach(id=>{
+let v = localStorage.getItem(id);
+if(v!==null && document.getElementById(id)) document.getElementById(id).value = v;
+});
+} else {
+aviso.innerHTML = "<p>Esta fase la ejecuta el estudiante con rol <b>Omar Martínez</b>. Si tú tienes ese rol, selecciónalo en la Fase 1.</p>";
+campos.classList.add("hidden");
+}
+}
+
+function validarOmar(){
+let o1=(document.getElementById("o1").value||"").trim();
+let o2=(document.getElementById("o2").value||"").trim();
+let o3=(document.getElementById("o3").value||"").trim();
+let o4=document.getElementById("o4").value;
+
+if(o1.length<MIN_TEXTAREA||o2.length<MIN_TEXTAREA||o3.length<MIN_TEXTAREA){
+alert("Completa el análisis, las inconsistencias y los riesgos con suficiente detalle.");
+return;
+}
+if(!o4){
+alert("Debes tomar una decisión final: aprobar o rechazar.");
+return;
+}
+guardar();
+localStorage.setItem("aprobado", o4==="aprobado" ? "true" : "false");
+if(o4==="aprobado"){
+alert("Sistema aprobado. La Fase 5 queda desbloqueada.");
+avanzarFase(5);
+} else {
+alert("Sistema rechazado. El equipo debe regresar a revisión antes de continuar.");
+}
+}
+
+// ---------- MOTOR DE FASES ----------
+function avanzarFase(destino){
+let actual = parseInt(localStorage.getItem("faseActual")||"1");
+
+if(destino===2 && actual<2){
+if(!revisarFase1()){ alert("Completa todos los campos de tu rol antes de avanzar."); return; }
+if(localStorage.getItem("descargado")!=="true"){ alert("Debes descargar tu archivo JSON antes de avanzar."); return; }
+}
+if(destino===3 && actual<3){
+if(localStorage.getItem("companeroCargado")!=="true"){ alert("Debes cargar el archivo del compañero antes de avanzar."); return; }
+}
+if(destino===4 && actual<4){
+let v1=(document.getElementById("v1").value||"").trim();
+let v2=(document.getElementById("v2").value||"").trim();
+let v3=(document.getElementById("v3").value||"").trim();
+if(v1.length<MIN_TEXTAREA||v2.length<MIN_TEXTAREA||v3.length<MIN_TEXTAREA){
+alert("Completa la validación cruzada (errores, mejoras y evaluación) antes de avanzar.");
+return;
+}
+guardar();
+}
+localStorage.setItem("faseActual", String(Math.max(actual,destino)));
+render();
+}
+
+function render(){
+let fase = parseInt(localStorage.getItem("faseActual")||"1");
+let rol = localStorage.getItem("rol")||"";
+let aprobado = localStorage.getItem("aprobado")==="true";
+
+let paneles = {1:"panel-fase1",2:"panel-fase2",3:"panel-fase3",4:"panel-fase4",5:"panel-fase5"};
+for(let n=1;n<=5;n++){
+let el = document.getElementById(paneles[n]);
+if(n<=fase){ el.classList.remove("locked"); }
+else { el.classList.add("locked"); }
+}
+// Fase 5 depende también de aprobación
+if(fase>=5 && !aprobado){
+document.getElementById("panel-fase5").classList.add("locked");
+}
+
+let nombres = {1:"Desarrollo individual",2:"Intercambio",3:"Validación cruzada",4:"Omar aprueba",5:"Integración final"};
+document.getElementById("faseTexto").innerHTML = "<b>Fase "+fase+":</b> "+nombres[fase];
+
+if(rol){ document.getElementById("rol").value = rol; cargarRol(); }
+document.getElementById("accionesFase2").classList.toggle("hidden", localStorage.getItem("companeroCargado")!=="true");
+mostrarPanelOmar();
+actualizarStepper();
+}
+
+function actualizarStepper(){
+let fase = parseInt(localStorage.getItem("faseActual")||"1");
+let nombres = ["Fase 1","Fase 2","Fase 3","Fase 4","Fase 5"];
+let html = "";
+nombres.forEach((n,i)=>{
+let num = i+1;
+let clase = num<fase ? "paso hecho" : (num===fase ? "paso activo" : "paso");
+html += '<div class="'+clase+'">'+n+'</div>';
+});
+document.getElementById("stepper").innerHTML = html;
+}
+
+// ---------- TIMER ----------
+let tiempo = 40*60;
+setInterval(()=>{
+let min=Math.floor(tiempo/60);
+let sec=tiempo%60;
+document.getElementById("timer").textContent = (min<10?"0":"")+min+":"+(sec<10?"0":"")+sec;
+tiempo--;
+},1000);
+
+// ---------- MODO DOCENTE ----------
+function cargarAlumno(){
+let file = document.getElementById("docenteFile").files[0];
+if(!file){ alert("Selecciona archivo"); return; }
+let reader = new FileReader();
+reader.onload = e=>{
+let d = JSON.parse(e.target.result);
+document.getElementById("estado").innerHTML = "Archivo cargado. Rol detectado: <b>"+(d.rol||"desconocido")+"</b>";
+
+let conf = ROLES[d.rol];
+let camposRol = conf ? conf.fields.map(f=>f.id) : [];
+let llenos = camposRol.filter(id => d[id] && d[id].trim().length>=15).length;
+let iaFields = camposRol.filter(id => /prompt|respuesta|analisis|análisis/i.test(id));
+
+let html = "<table>";
+html += "<tr><th>Criterio</th><th>Resultado</th></tr>";
+html += "<tr><td>Campos del rol completos</td><td>"+ (conf?llenos+"/"+camposRol.length:"—") +"</td></tr>";
+html += "<tr><td>Validación cruzada (v1,v2,v3)</td><td>"+((d.v1&&d.v1.length>15&&d.v2&&d.v2.length>15&&d.v3&&d.v3.length>15)?'<span class="badge-ok">Completa</span>':'<span class="badge-falta">Débil / incompleta</span>')+"</td></tr>";
+html += "<tr><td>Uso documentado de IA</td><td>"+(conf && iaFields.some(id=>d[id]&&d[id].trim().length>0) ? '<span class="badge-ok">Sí</span>' : '<span class="badge-falta">No evidenciado</span>')+"</td></tr>";
+html += "<tr><td>Análisis de Omar (o1,o2,o3)</td><td>"+((d.o1&&d.o2&&d.o3)?'<span class="badge-ok">Presente</span>':'—')+"</td></tr>";
+html += "<tr><td>Decisión de Omar</td><td>"+(d.o4||"—")+"</td></tr>";
+html += "<tr><td>Integración final (f1-f4)</td><td>"+((d.f1&&d.f2&&d.f3&&d.f4)?'<span class="badge-ok">Completa</span>':'<span class="badge-falta">Incompleta</span>')+"</td></tr>";
+html += "</table>";
+document.getElementById("reporteDocente").innerHTML = html;
+};
+reader.readAsText(file);
+}
+
+// ---------- INICIO ----------
+render();
+</script>
+
+</body>
+</html>
