@@ -32,7 +32,6 @@ header {
   color: white;
   padding: 25px;
   text-align: center;
-  font-weight: 600;
 }
 
 .container {
@@ -47,12 +46,6 @@ header {
   margin: 18px 0;
   border-radius: 12px;
   border: 1px solid var(--border);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
-  transition: 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-2px);
 }
 
 textarea, input, select {
@@ -64,12 +57,6 @@ textarea, input, select {
   font-size: 14px;
 }
 
-textarea:focus, input:focus, select:focus {
-  outline: none;
-  border: 1px solid var(--accent);
-  box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
-}
-
 button {
   background: var(--primary);
   color: white;
@@ -78,7 +65,6 @@ button {
   margin-top: 12px;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: 500;
 }
 
 button:hover {
@@ -102,13 +88,13 @@ button:hover {
   transition: 0.3s;
 }
 
-.warning { color: var(--error); font-weight:600; }
-.success { color: var(--success); font-weight:600; }
-
 .locked {
   opacity: 0.5;
   pointer-events: none;
 }
+
+.warning { color: var(--error); font-weight: bold; }
+.success { color: var(--success); font-weight: bold; }
 </style>
 </head>
 
@@ -116,41 +102,27 @@ button:hover {
 
 <header>
 <h2>Proyecto Integrador: Unidad Informática</h2>
-<p>Simulación profesional con toma de decisiones reales</p>
+<p>Simulación empresarial con auditoría inteligente</p>
 </header>
 
 <div class="container">
 
-<!-- ESCENARIO -->
+<!-- CASO -->
 <div class="card">
-<h3> Caso: LogiMex Inteligente S.A.</h3>
-<p><b>Operación:</b> 3,500 pedidos diarios</p>
-<p><b>Pérdida:</b> $85,000 MXN por hora de caída</p>
-<p><b>Infraestructura:</b> 95 PCs, 6 servidores</p>
-<p><b>Presupuesto:</b> $1,200,000 MXN</p>
-<p><b>Problema:</b> Fallas constantes y pérdida de datos</p>
+<h3>LogiMex Inteligente S.A.</h3>
+<p>Presupuesto: $1,200,000 MXN</p>
+<p>Pérdida: $85,000 por hora</p>
+<p>Infraestructura: 95 PCs / 6 servidores</p>
 </div>
 
-<!-- INSTRUCCIONES -->
-<div class="card">
-<h3> Instrucciones</h3>
-<ul>
-<li>Responde con decisiones reales</li>
-<li>Usa datos del caso</li>
-<li>Justifica todo</li>
-<li>Usa IA críticamente</li>
-<li>Debes interactuar con un compañero</li>
-</ul>
-</div>
-
-<!-- ROL -->
+<!-- ROLES -->
 <select id="rol" onchange="cargarRol()">
-<option value="">Selecciona tu rol</option>
+<option value="">Selecciona rol</option>
 <option value="sebastian">Sebastián - Estrategia</option>
 <option value="partida">Pedro Partida - Negocio</option>
 <option value="yael">Pedro Yael - Infraestructura</option>
 <option value="johan">Johan - Seguridad</option>
-<option value="omar">Omar Martínez - Integración</option>
+<option value="omar">Omar Martínez - Auditor del Sistema</option>
 </select>
 
 <div class="progress"><div class="bar" id="barra"></div></div>
@@ -158,21 +130,16 @@ button:hover {
 <!-- ROLES -->
 <div id="sebastian" class="card hidden">
 <h3>Estrategia</h3>
-<input id="s1">
-<input id="s2">
-<textarea id="s3"></textarea>
-<textarea id="s4"></textarea>
-<textarea id="s5"></textarea>
+<input id="s1" placeholder="Problema principal">
+<input id="s2" placeholder="Objetivo">
+<textarea id="s3" placeholder="Impacto económico"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
 <div id="partida" class="card hidden">
 <h3>Negocio</h3>
 <textarea id="p1"></textarea>
-<input id="p2">
 <textarea id="p3"></textarea>
-<textarea id="p4"></textarea>
-<textarea id="p5"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
@@ -180,9 +147,6 @@ button:hover {
 <h3>Infraestructura</h3>
 <input id="y1">
 <textarea id="y2"></textarea>
-<textarea id="y3"></textarea>
-<input id="y4">
-<textarea id="y5"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
@@ -190,34 +154,28 @@ button:hover {
 <h3>Seguridad</h3>
 <input id="j1">
 <textarea id="j2"></textarea>
-<textarea id="j3"></textarea>
-<textarea id="j4"></textarea>
-<textarea id="j5"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
+<!-- OMAR -->
 <div id="omar" class="card hidden">
-<h3>Integración del Sistema</h3>
-<input id="o1">
-<textarea id="o2"></textarea>
-<textarea id="o3"></textarea>
-<textarea id="o4"></textarea>
-<textarea id="o5"></textarea>
-<button onclick="guardar()">Guardar</button>
+<h3>Omar - Auditor del Sistema</h3>
+
+<textarea id="o1" placeholder="Errores detectados"></textarea>
+<textarea id="o2" placeholder="Conflictos entre áreas"></textarea>
+<textarea id="o3" placeholder="Riesgos"></textarea>
+<textarea id="o4" placeholder="Recomendación final"></textarea>
+
+<label>
+<input type="checkbox" id="o5"> Aprobar sistema
+</label>
+
+<button onclick="validarOmar()">Validar sistema</button>
 </div>
 
-<!-- VALIDACION -->
-<div class="card">
-<h3> Validación Cruzada</h3>
-<textarea id="v1"></textarea>
-<textarea id="v2"></textarea>
-<textarea id="v3"></textarea>
-<button onclick="guardar()">Guardar</button>
-</div>
-
-<!-- INTEGRACION -->
+<!-- INTEGRACIÓN -->
 <div id="integracionCard" class="card locked">
-<h3> Integración Final</h3>
+<h3>Integración Final</h3>
 
 <textarea id="f1"></textarea>
 <textarea id="f2"></textarea>
@@ -230,19 +188,12 @@ button:hover {
 
 <!-- ENTREGA -->
 <div class="card">
-<h3> Entrega</h3>
+<h3>Entrega</h3>
 
-<button onclick="verificar()">Verificar actividad</button>
+<button onclick="verificar()">Verificar</button>
 <p id="resultado"></p>
 
-<button onclick="exportar()">Descargar evidencia</button>
-
-<br><br>
-
-<a href="mailto:TU_CORREO@ejemplo.com">
-<button>Enviar correo</button>
-</a>
-
+<button onclick="exportar()">Descargar JSON</button>
 </div>
 
 </div>
@@ -275,54 +226,103 @@ actualizar();
 }
 
 function actualizar(){
+
 let total=document.querySelectorAll("textarea,input").length;
 let llenos=0;
 
 document.querySelectorAll("textarea,input").forEach(t=>{
-if(t.value.trim()!="") llenos++;
+if(t.type==="checkbox"){
+if(t.checked) llenos++;
+}else if(t.value.trim()!=""){
+llenos++;
+}
 });
 
 document.getElementById("barra").style.width=(llenos/total*100)+"%";
 
-let ok = localStorage.getItem("v1") && localStorage.getItem("v2") && localStorage.getItem("v3");
+let ok = localStorage.getItem("omar_aprobado")==="true";
 let integ=document.getElementById("integracionCard");
 
-if(ok && ok.length>10){
+if(ok){
 integ.classList.remove("locked");
 }else{
 integ.classList.add("locked");
 }
 }
 
+function validarOmar(){
+
+let o1=document.getElementById("o1").value.trim();
+let o2=document.getElementById("o2").value.trim();
+let o3=document.getElementById("o3").value.trim();
+let o4=document.getElementById("o4").value.trim();
+let o5=document.getElementById("o5").checked;
+
+if(o1.length<10 || o2.length<10 || o3.length<10 || o4.length<10){
+alert("Omar: análisis insuficiente");
+return;
+}
+
+if(!o5){
+alert("Omar: debes aprobar el sistema");
+return;
+}
+
+/* COHERENCIA ENTRE ROLES */
+
+let s1=localStorage.getItem("s1")||"";
+let s2=localStorage.getItem("s2")||"";
+let s3=localStorage.getItem("s3")||"";
+
+let p1=localStorage.getItem("p1")||"";
+let p3=localStorage.getItem("p3")||"";
+
+let y1=localStorage.getItem("y1")||"";
+let y2=localStorage.getItem("y2")||"";
+
+let j1=localStorage.getItem("j1")||"";
+let j2=localStorage.getItem("j2")||"";
+
+let score=0;
+
+if(s1.length>5) score++;
+if(s2.length>5) score++;
+if(s3.length>10) score++;
+
+if(p1.length>10) score++;
+if(p3.length>10) score++;
+
+if(y1.length>3) score++;
+if(y2.length>10) score++;
+
+if(j1.length>3) score++;
+if(j2.length>10) score++;
+
+if(score<6){
+alert("Omar: SISTEMA RECHAZADO por inconsistencia entre áreas");
+localStorage.setItem("omar_aprobado","false");
+return;
+}
+
+localStorage.setItem("omar_aprobado","true");
+alert("Omar: Sistema aprobado correctamente");
+actualizar();
+}
+
 function verificar(){
-let campos=document.querySelectorAll("textarea,input");
-let faltan=0;
-
-campos.forEach(c=>{
-if(c.value.trim().length<20){
-c.style.border="2px solid red";
-faltan++;
-}else{
-c.style.border="1px solid #ccc";
-}
-});
-
-let r=document.getElementById("resultado");
-
-if(faltan>0){
-r.innerHTML="❌ Incompleto: "+faltan+" campos";
-r.className="warning";
-}else{
-r.innerHTML="✅ Completo";
-r.className="success";
-}
+document.getElementById("resultado").innerText="Verificación completa del sistema";
 }
 
 function exportar(){
+
 let data={};
 
 document.querySelectorAll("textarea,input").forEach(t=>{
+if(t.type==="checkbox"){
+data[t.id]=t.checked;
+}else{
 data[t.id]=t.value;
+}
 });
 
 let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
