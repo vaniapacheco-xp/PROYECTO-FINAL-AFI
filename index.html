@@ -9,8 +9,9 @@ body { font-family: Arial; margin:0; background:#f1f5f9;}
 header {background:#1e3a8a;color:white;padding:20px;text-align:center;}
 .container{max-width:1100px;margin:auto;padding:20px;}
 .card{background:white;padding:20px;margin:15px 0;border-radius:12px;}
-textarea,input,select{width:100%;padding:10px;margin-top:8px;}
-button{background:#1e3a8a;color:white;padding:10px;border:none;margin-top:10px;cursor:pointer;}
+textarea,input,select{width:100%;padding:10px;margin-top:8px;box-sizing:border-box;}
+button{background:#1e3a8a;color:white;padding:10px;border:none;margin-top:10px;cursor:pointer;border-radius:6px;}
+button:hover{background:#16296b;}
 .hidden{display:none;}
 .locked{opacity:0.5;pointer-events:none;}
 .timer {font-size:20px;color:#dc2626;font-weight:bold;}
@@ -56,6 +57,7 @@ button{background:#1e3a8a;color:white;padding:10px;border:none;margin-top:10px;c
 </div>
 
 <!-- ROLES -->
+<div class="card">
 <select id="rol" onchange="cargarRol()">
 <option value="">Selecciona tu rol</option>
 <option value="sebastian">Sebastián – Director de Estrategia</option>
@@ -64,6 +66,7 @@ button{background:#1e3a8a;color:white;padding:10px;border:none;margin-top:10px;c
 <option value="johan">Johan – Seguridad</option>
 <option value="omar">Omar Martínez – Integración</option>
 </select>
+</div>
 
 <div id="sebastian" class="card hidden">
 <h3>Sebastián – Estrategia</h3>
@@ -156,6 +159,7 @@ function guardar(){
 document.querySelectorAll("textarea,input").forEach(t=>{
 localStorage.setItem(t.id, t.type==="checkbox"?t.checked:t.value);
 });
+alert("Guardado");
 }
 
 // IMPORTAR
@@ -206,223 +210,7 @@ let data={};
 document.querySelectorAll("textarea,input").forEach(t=>{
 data[t.id]=t.type==="checkbox"?t.checked:t.value;
 });
-let blob=new Blob([JSON.stringify(data,null,2)]);
-let a=document.createElement("a");
-a.href=URL.createObjectURL(blob);
-a.download="proyecto.json";
-a.click();
-}
-
-// DOCENTE
-f<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Proyecto Integrador TI</title>
-
-<style>
-body { font-family: Arial; margin:0; background:#f1f5f9;}
-header {background:#1e3a8a;color:white;padding:20px;text-align:center;}
-.container{max-width:1100px;margin:auto;padding:20px;}
-.card{background:white;padding:20px;margin:15px 0;border-radius:12px;}
-textarea,input,select{width:100%;padding:10px;margin-top:8px;}
-button{background:#1e3a8a;color:white;padding:10px;border:none;margin-top:10px;cursor:pointer;}
-.hidden{display:none;}
-.locked{opacity:0.5;pointer-events:none;}
-.timer {font-size:20px;color:#dc2626;font-weight:bold;}
-</style>
-</head>
-
-<body>
-
-<header>
-<h2>Proyecto Integrador: Unidad Informática</h2>
-<p id="faseTexto"><b>Fase 1:</b> Desarrollo individual</p>
-<p class="timer" id="timer">40:00</p>
-</header>
-
-<div class="container">
-
-<!-- CASO -->
-<div class="card">
-<h3>Caso: LogiMex Inteligente S.A. de C.V.</h3>
-<p>3,500 pedidos diarios | $85,000 MXN por hora de caída</p>
-<p>Infraestructura: 95 equipos, 6 servidores sin redundancia</p>
-<p>Problema: fallas constantes y pérdida de datos</p>
-<p>Presupuesto: $1,200,000 MXN</p>
-</div>
-
-<!-- FASES -->
-<div class="card">
-<h3>Fases</h3>
-<ul>
-<li>Fase 1: Desarrollo individual</li>
-<li>Fase 2: Intercambio</li>
-<li>Fase 3: Validación</li>
-<li>Fase 4: Omar aprueba</li>
-<li>Fase 5: Integración final</li>
-</ul>
-</div>
-
-<!-- IMPORTAR -->
-<div class="card">
-<h3>Cargar trabajo del compañero</h3>
-<input type="file" id="fileInput" accept=".json">
-<button onclick="importarJSON()">Cargar JSON</button>
-</div>
-
-<!-- ROLES -->
-<select id="rol" onchange="cargarRol()">
-<option value="">Selecciona tu rol</option>
-<option value="sebastian">Sebastián – Director de Estrategia</option>
-<option value="partida">Pedro Partida – Analista de Negocio</option>
-<option value="yael">Pedro Yael – Infraestructura</option>
-<option value="johan">Johan – Seguridad</option>
-<option value="omar">Omar Martínez – Integración</option>
-</select>
-
-<div id="sebastian" class="card hidden">
-<h3>Sebastián – Estrategia</h3>
-<input id="s1" placeholder="Problema">
-<textarea id="s2" placeholder="Objetivo"></textarea>
-</div>
-
-<div id="partida" class="card hidden">
-<h3>Pedro Partida – Negocio</h3>
-<textarea id="p1" placeholder="Impacto"></textarea>
-</div>
-
-<div id="yael" class="card hidden">
-<h3>Infraestructura</h3>
-<input id="y1" placeholder="Solución técnica">
-</div>
-
-<div id="johan" class="card hidden">
-<h3>Seguridad</h3>
-<input id="j1" placeholder="Riesgo">
-</div>
-
-<!-- VALIDACION -->
-<div class="card">
-<h3>Validación cruzada</h3>
-<input id="v0" placeholder="Nombre del compañero">
-<textarea id="v1" placeholder="Errores"></textarea>
-<textarea id="v2" placeholder="Mejoras"></textarea>
-<textarea id="v3" placeholder="Evaluación"></textarea>
-<button onclick="guardar()">Guardar</button>
-</div>
-
-<!-- OMAR -->
-<div id="omar" class="card hidden">
-<h3>Omar – Integración</h3>
-<textarea id="o1" placeholder="Análisis"></textarea>
-<label><input type="checkbox" id="o5"> Aprobar sistema</label>
-<button onclick="validar()">Validar</button>
-</div>
-
-<!-- INTEGRACION -->
-<div id="integracion" class="card locked">
-<h3>Integración final</h3>
-<textarea id="f1" placeholder="Solución integral"></textarea>
-</div>
-
-<!-- EXPORTAR -->
-<div class="card">
-<button onclick="exportar()">Descargar JSON</button>
-</div>
-
-<!-- MODO DOCENTE -->
-<div class="card">
-<h3>Modo docente</h3>
-
-<input type="file" id="docenteFile" accept=".json">
-<button onclick="cargarAlumno()">Cargar trabajo</button>
-
-<p id="estado"></p>
-
-<p id="sem1"></p>
-<p id="sem2"></p>
-<p id="sem3"></p>
-<p id="sem4"></p>
-
-<input id="calificacion" placeholder="Calificación">
-<textarea id="comentarios" placeholder="Observaciones"></textarea>
-
-</div>
-
-</div>
-
-<script>
-
-// TIMER
-let tiempo = 40 * 60;
-setInterval(()=>{
-let min=Math.floor(tiempo/60);
-let sec=tiempo%60;
-document.getElementById("timer").textContent =
-(min<10?"0":"")+min+":"+(sec<10?"0":"")+sec;
-tiempo--;
-if(tiempo<=0){
-document.getElementById("faseTexto").innerHTML="<b>Fase 2:</b> Intercambio";
-}
-},1000);
-
-// GUARDAR
-function guardar(){
-document.querySelectorAll("textarea,input").forEach(t=>{
-localStorage.setItem(t.id, t.type==="checkbox"?t.checked:t.value);
-});
-}
-
-// IMPORTAR
-function importarJSON(){
-let file=document.getElementById("fileInput").files[0];
-if(!file){alert("Selecciona archivo");return;}
-let reader=new FileReader();
-reader.onload=e=>{
-let data=JSON.parse(e.target.result);
-for(let k in data){localStorage.setItem(k,data[k]);}
-alert("Cargado");
-location.reload();
-};
-reader.readAsText(file);
-}
-
-// ROLES
-function cargarRol(){
-let rol=document.getElementById("rol").value;
-document.querySelectorAll(".card").forEach(c=>{
-if(c.id && c.id!="integracion") c.classList.add("hidden");
-});
-if(rol) document.getElementById(rol).classList.remove("hidden");
-}
-
-// VALIDACION FINAL
-function validar(){
-let v1=localStorage.getItem("v1")||"";
-let v2=localStorage.getItem("v2")||"";
-let v3=localStorage.getItem("v3")||"";
-
-if(v1.length<10||v2.length<10||v3.length<10){
-alert("Validación incompleta");
-return;
-}
-
-if(!document.getElementById("o5").checked){
-alert("Debes aprobar");
-return;
-}
-
-document.getElementById("integracion").classList.remove("locked");
-}
-
-// EXPORTAR
-function exportar(){
-let data={};
-document.querySelectorAll("textarea,input").forEach(t=>{
-data[t.id]=t.type==="checkbox"?t.checked:t.value;
-});
-let blob=new Blob([JSON.stringify(data,null,2)]);
+let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
 let a=document.createElement("a");
 a.href=URL.createObjectURL(blob);
 a.download="proyecto.json";
@@ -437,8 +225,9 @@ let reader=new FileReader();
 reader.onload=e=>{
 let d=JSON.parse(e.target.result);
 
-document.getElementById("sem1").innerHTML="Rol: "+(d.s1||d.p1?"Cumple":"Bajo");
-document.getElementById("sem2").innerHTML="Validación: "+(d.v1?.length>20?"Buena":"Débil");
+document.getElementById("estado").innerHTML="Archivo cargado correctamente.";
+document.getElementById("sem1").innerHTML="Rol: "+((d.s1||d.p1)?"Cumple":"Bajo");
+document.getElementById("sem2").innerHTML="Validación: "+((d.v1 && d.v1.length>20)?"Buena":"Débil");
 document.getElementById("sem3").innerHTML="Omar: "+(d.o1?"Correcto":"Falta");
 document.getElementById("sem4").innerHTML="Integración: "+(d.f1?"Completa":"Incompleta");
 
@@ -447,9 +236,6 @@ reader.readAsText(file);
 }
 
 </script>
-
-</body>
-</html>
 
 </body>
 </html>
