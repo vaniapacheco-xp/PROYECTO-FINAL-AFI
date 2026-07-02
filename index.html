@@ -6,95 +6,14 @@
 <title>Proyecto Integrador TI</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-
-:root {
-  --primary: #1e3a8a;
-  --secondary: #3b82f6;
-  --accent: #2563eb;
-  --bg: #f1f5f9;
-  --card: #ffffff;
-  --text: #0f172a;
-  --border: #e2e8f0;
-  --success: #16a34a;
-  --error: #dc2626;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-}
-
-header {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  padding: 25px;
-  text-align: center;
-}
-
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 25px;
-}
-
-.card {
-  background: var(--card);
-  padding: 22px;
-  margin: 18px 0;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-}
-
-textarea, input, select {
-  width: 100%;
-  padding: 12px;
-  margin-top: 8px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  font-size: 14px;
-}
-
-button {
-  background: var(--primary);
-  color: white;
-  padding: 10px 16px;
-  border: none;
-  margin-top: 12px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: var(--accent);
-}
-
-.hidden { display:none; }
-
-.progress {
-  height: 10px;
-  background: var(--border);
-  margin-top: 12px;
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.bar {
-  height: 10px;
-  background: var(--success);
-  width: 0%;
-  transition: 0.3s;
-}
-
-.locked {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.warning { color: var(--error); font-weight: bold; }
-.success { color: var(--success); font-weight: bold; }
+body { font-family: Arial; margin:0; background:#f4f6f9; }
+header { background:#1e3a8a; color:white; padding:20px; text-align:center; }
+.container { max-width:1000px; margin:auto; padding:20px; }
+.card { background:white; padding:20px; margin:15px 0; border-radius:10px; }
+textarea,input,select { width:100%; padding:10px; margin-top:8px; }
+button { background:#1e3a8a; color:white; padding:10px; border:none; margin-top:10px; cursor:pointer; }
+.hidden{display:none;}
+.locked{opacity:0.5; pointer-events:none;}
 </style>
 </head>
 
@@ -102,97 +21,86 @@ button:hover {
 
 <header>
 <h2>Proyecto Integrador: Unidad Informática</h2>
-<p>Simulación empresarial con auditoría inteligente</p>
 </header>
 
 <div class="container">
 
-<!-- CASO -->
-<div class="card">
-<h3>LogiMex Inteligente S.A.</h3>
-<p>Presupuesto: $1,200,000 MXN</p>
-<p>Pérdida: $85,000 por hora</p>
-<p>Infraestructura: 95 PCs / 6 servidores</p>
-</div>
-
-<!-- ROLES -->
 <select id="rol" onchange="cargarRol()">
 <option value="">Selecciona rol</option>
-<option value="sebastian">Sebastián - Estrategia</option>
-<option value="partida">Pedro Partida - Negocio</option>
-<option value="yael">Pedro Yael - Infraestructura</option>
-<option value="johan">Johan - Seguridad</option>
-<option value="omar">Omar Martínez - Auditor del Sistema</option>
+<option value="sebastian">Estrategia</option>
+<option value="partida">Negocio</option>
+<option value="yael">Infraestructura</option>
+<option value="johan">Seguridad</option>
+<option value="omar">Omar - Auditor</option>
 </select>
 
-<div class="progress"><div class="bar" id="barra"></div></div>
-
-<!-- ROLES -->
+<!-- ESTRATEGIA -->
 <div id="sebastian" class="card hidden">
 <h3>Estrategia</h3>
-<input id="s1" placeholder="Problema principal">
-<input id="s2" placeholder="Objetivo">
+<input id="s1" placeholder="Problema del caso">
+<input id="s2" placeholder="Objetivo medible">
 <textarea id="s3" placeholder="Impacto económico"></textarea>
+<textarea id="s4" placeholder="Organización de roles"></textarea>
+<textarea id="s5" placeholder="Uso de IA"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
+<!-- NEGOCIO -->
 <div id="partida" class="card hidden">
 <h3>Negocio</h3>
-<textarea id="p1"></textarea>
-<textarea id="p3"></textarea>
+<textarea id="p1" placeholder="Impacto en negocio"></textarea>
+<textarea id="p3" placeholder="Costo-beneficio"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
+<!-- INFRA -->
 <div id="yael" class="card hidden">
 <h3>Infraestructura</h3>
-<input id="y1">
-<textarea id="y2"></textarea>
+<input id="y1" placeholder="Infraestructura propuesta">
+<textarea id="y2" placeholder="Justificación técnica"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
+<!-- SEGURIDAD -->
 <div id="johan" class="card hidden">
 <h3>Seguridad</h3>
-<input id="j1">
-<textarea id="j2"></textarea>
+<input id="j1" placeholder="Riesgo principal">
+<textarea id="j2" placeholder="Controles de seguridad"></textarea>
 <button onclick="guardar()">Guardar</button>
+</div>
+
+<!-- VALIDACION CRUZADA -->
+<div class="card">
+<h3>Validación Cruzada</h3>
+<textarea id="v1" placeholder="Errores detectados"></textarea>
+<textarea id="v2" placeholder="Mejoras"></textarea>
+<textarea id="v3" placeholder="Evaluación crítica"></textarea>
+<button onclick="guardar()">Guardar validación</button>
 </div>
 
 <!-- OMAR -->
 <div id="omar" class="card hidden">
-<h3>Omar - Auditor del Sistema</h3>
-
-<textarea id="o1" placeholder="Errores detectados"></textarea>
+<h3>Omar - Auditor</h3>
+<textarea id="o1" placeholder="Errores del sistema"></textarea>
 <textarea id="o2" placeholder="Conflictos entre áreas"></textarea>
-<textarea id="o3" placeholder="Riesgos"></textarea>
-<textarea id="o4" placeholder="Recomendación final"></textarea>
-
-<label>
-<input type="checkbox" id="o5"> Aprobar sistema
-</label>
-
-<button onclick="validarOmar()">Validar sistema</button>
+<textarea id="o3" placeholder="Riesgos críticos"></textarea>
+<textarea id="o4" placeholder="Recomendación"></textarea>
+<label><input type="checkbox" id="o5"> Aprobar sistema</label>
+<button onclick="validarOmar()">Validar</button>
 </div>
 
-<!-- INTEGRACIÓN -->
-<div id="integracionCard" class="card locked">
+<!-- INTEGRACION -->
+<div id="integracion" class="card locked">
 <h3>Integración Final</h3>
-
-<textarea id="f1"></textarea>
-<textarea id="f2"></textarea>
-<textarea id="f3"></textarea>
-<textarea id="f4"></textarea>
-<textarea id="f5"></textarea>
-
+<textarea id="f1" placeholder="Solución integral"></textarea>
+<textarea id="f2" placeholder="Decisión final"></textarea>
+<textarea id="f3" placeholder="Impacto"></textarea>
+<textarea id="f4" placeholder="Riesgos"></textarea>
+<textarea id="f5" placeholder="Defensa"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
-<!-- ENTREGA -->
 <div class="card">
-<h3>Entrega</h3>
-
-<button onclick="verificar()">Verificar</button>
-<p id="resultado"></p>
-
 <button onclick="exportar()">Descargar JSON</button>
 </div>
 
@@ -202,129 +110,95 @@ button:hover {
 
 function cargarRol(){
 let rol=document.getElementById("rol").value;
-
 document.querySelectorAll(".card").forEach(c=>{
-if(c.id && c.id!=="integracionCard") c.classList.add("hidden");
+if(c.id && c.id!="integracion") c.classList.add("hidden");
 });
-
 if(rol) document.getElementById(rol).classList.remove("hidden");
 cargarDatos();
 }
 
 function guardar(){
 document.querySelectorAll("textarea,input").forEach(t=>{
-localStorage.setItem(t.id,t.value);
+localStorage.setItem(t.id, t.type==="checkbox"?t.checked:t.value);
 });
 actualizar();
 }
 
 function cargarDatos(){
 document.querySelectorAll("textarea,input").forEach(t=>{
+if(t.type==="checkbox"){
+t.checked=localStorage.getItem(t.id)==="true";
+}else{
 t.value=localStorage.getItem(t.id)||"";
+}
 });
 actualizar();
 }
 
 function actualizar(){
 
-let total=document.querySelectorAll("textarea,input").length;
-let llenos=0;
+let v1=(localStorage.getItem("v1")||"").length>10;
+let v2=(localStorage.getItem("v2")||"").length>10;
+let v3=(localStorage.getItem("v3")||"").length>10;
 
-document.querySelectorAll("textarea,input").forEach(t=>{
-if(t.type==="checkbox"){
-if(t.checked) llenos++;
-}else if(t.value.trim()!=""){
-llenos++;
-}
-});
+let validacionOK = v1 && v2 && v3;
+let omarOK = localStorage.getItem("omar_aprobado")==="true";
 
-document.getElementById("barra").style.width=(llenos/total*100)+"%";
+/* BLOQUEO REAL */
+let desbloquear = validacionOK && omarOK;
 
-let ok = localStorage.getItem("omar_aprobado")==="true";
-let integ=document.getElementById("integracionCard");
-
-if(ok){
-integ.classList.remove("locked");
-}else{
-integ.classList.add("locked");
-}
+document.getElementById("integracion").classList.toggle("locked", !desbloquear);
 }
 
+/* OMAR INTELIGENTE */
 function validarOmar(){
 
-let o1=document.getElementById("o1").value.trim();
-let o2=document.getElementById("o2").value.trim();
-let o3=document.getElementById("o3").value.trim();
-let o4=document.getElementById("o4").value.trim();
-let o5=document.getElementById("o5").checked;
+// primero exige validación cruzada
+let v1=(localStorage.getItem("v1")||"").length>10;
+let v2=(localStorage.getItem("v2")||"").length>10;
+let v3=(localStorage.getItem("v3")||"").length>10;
 
-if(o1.length<10 || o2.length<10 || o3.length<10 || o4.length<10){
-alert("Omar: análisis insuficiente");
+if(!(v1 && v2 && v3)){
+alert("No puedes validar sin validación cruzada previa");
 return;
 }
 
-if(!o5){
-alert("Omar: debes aprobar el sistema");
+// campos Omar
+let campos=["o1","o2","o3","o4"];
+for(let c of campos){
+if((document.getElementById(c).value||"").length<10){
+alert("Análisis insuficiente");
+return;
+}
+}
+
+if(!document.getElementById("o5").checked){
+alert("Debes aprobar el sistema");
 return;
 }
 
-/* COHERENCIA ENTRE ROLES */
-
-let s1=localStorage.getItem("s1")||"";
-let s2=localStorage.getItem("s2")||"";
-let s3=localStorage.getItem("s3")||"";
-
-let p1=localStorage.getItem("p1")||"";
-let p3=localStorage.getItem("p3")||"";
-
-let y1=localStorage.getItem("y1")||"";
-let y2=localStorage.getItem("y2")||"";
-
-let j1=localStorage.getItem("j1")||"";
-let j2=localStorage.getItem("j2")||"";
-
+// coherencia
 let score=0;
-
-if(s1.length>5) score++;
-if(s2.length>5) score++;
-if(s3.length>10) score++;
-
-if(p1.length>10) score++;
-if(p3.length>10) score++;
-
-if(y1.length>3) score++;
-if(y2.length>10) score++;
-
-if(j1.length>3) score++;
-if(j2.length>10) score++;
+["s1","s2","s3","p1","p3","y1","y2","j1","j2"].forEach(id=>{
+if((localStorage.getItem(id)||"").length>5) score++;
+});
 
 if(score<6){
-alert("Omar: SISTEMA RECHAZADO por inconsistencia entre áreas");
+alert("Sistema rechazado por inconsistencias");
 localStorage.setItem("omar_aprobado","false");
 return;
 }
 
 localStorage.setItem("omar_aprobado","true");
-alert("Omar: Sistema aprobado correctamente");
+alert("Sistema aprobado correctamente");
 actualizar();
 }
 
-function verificar(){
-document.getElementById("resultado").innerText="Verificación completa del sistema";
-}
-
 function exportar(){
-
 let data={};
-
 document.querySelectorAll("textarea,input").forEach(t=>{
-if(t.type==="checkbox"){
-data[t.id]=t.checked;
-}else{
-data[t.id]=t.value;
-}
+data[t.id]=t.type==="checkbox"?t.checked:t.value;
 });
-
 let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
 let a=document.createElement("a");
 a.href=URL.createObjectURL(blob);
