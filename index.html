@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Proyecto Integrador TI</title>
 
 <style>
@@ -14,6 +13,7 @@ textarea,input,select{width:100%;padding:10px;margin-top:8px;}
 button{background:#1e3a8a;color:white;padding:10px;border:none;margin-top:10px;cursor:pointer;}
 .hidden{display:none;}
 .locked{opacity:0.5;pointer-events:none;}
+.timer {font-size:20px;color:#dc2626;font-weight:bold;}
 </style>
 </head>
 
@@ -21,214 +21,213 @@ button{background:#1e3a8a;color:white;padding:10px;border:none;margin-top:10px;c
 
 <header>
 <h2>Proyecto Integrador: Unidad Informática</h2>
-<p>Simulación profesional basada en toma de decisiones reales</p>
+<p id="faseTexto"><b>Fase 1:</b> Desarrollo individual</p>
+<p class="timer" id="timer">40:00</p>
 </header>
 
 <div class="container">
 
-<!-- 🔵 CASO COMPLETO -->
+<!-- CASO -->
 <div class="card">
 <h3>Caso: LogiMex Inteligente S.A. de C.V.</h3>
-
-<p><b>Giro:</b> Empresa de logística y distribución nacional</p>
-<p><b>Operación:</b> 3,500 pedidos diarios</p>
-<p><b>Sucursales:</b> 4 centros de distribución</p>
-
-<p><b>Infraestructura actual:</b></p>
-<ul>
-<li>95 computadoras operativas</li>
-<li>6 servidores físicos sin redundancia</li>
-<li>Sistema ERP obsoleto</li>
-<li>Respaldos manuales cada 48 horas</li>
-</ul>
-
-<p><b>Problemas detectados:</b></p>
-<ul>
-<li>Caídas del sistema 3 veces por semana</li>
-<li>Pérdida de datos reciente (6 horas)</li>
-<li>Saturación de red en horas pico</li>
-<li>Falta de políticas de seguridad</li>
-</ul>
-
-<p><b>Impacto:</b></p>
-<ul>
-<li>$85,000 MXN por hora de caída</li>
-<li>Retrasos en entregas</li>
-<li>Clientes en riesgo de cancelación</li>
-</ul>
-
-<p><b>Restricción:</b> Presupuesto máximo $1,200,000 MXN</p>
-<p><b>Situación crítica:</b> Si ocurre otra falla en 1 mes se pierde el contrato principal</p>
+<p>3,500 pedidos diarios | $85,000 MXN por hora de caída</p>
+<p>Infraestructura: 95 equipos, 6 servidores sin redundancia</p>
+<p>Problema: fallas constantes y pérdida de datos</p>
+<p>Presupuesto: $1,200,000 MXN</p>
 </div>
 
-<!-- 🔵 SELECCION DE ROL -->
+<!-- FASES -->
+<div class="card">
+<h3>Fases</h3>
+<ul>
+<li>Fase 1: Desarrollo individual</li>
+<li>Fase 2: Intercambio</li>
+<li>Fase 3: Validación</li>
+<li>Fase 4: Omar aprueba</li>
+<li>Fase 5: Integración final</li>
+</ul>
+</div>
+
+<!-- IMPORTAR -->
+<div class="card">
+<h3>Cargar trabajo del compañero</h3>
+<input type="file" id="fileInput" accept=".json">
+<button onclick="importarJSON()">Cargar JSON</button>
+</div>
+
+<!-- ROLES -->
 <select id="rol" onchange="cargarRol()">
 <option value="">Selecciona tu rol</option>
 <option value="sebastian">Sebastián – Director de Estrategia</option>
 <option value="partida">Pedro Partida – Analista de Negocio</option>
-<option value="yael">Pedro Yael – Arquitecto de Infraestructura</option>
-<option value="johan">Johan – Responsable de Seguridad</option>
-<option value="omar">Omar Martínez – Gestor de Operaciones e Integración</option>
+<option value="yael">Pedro Yael – Infraestructura</option>
+<option value="johan">Johan – Seguridad</option>
+<option value="omar">Omar Martínez – Integración</option>
 </select>
 
-<!-- 🔵 ROLES -->
-
 <div id="sebastian" class="card hidden">
-<h3>Sebastián – Director de Estrategia</h3>
-<input id="s1" placeholder="Problema principal basado en el caso">
-<input id="s2" placeholder="Objetivo medible">
-<textarea id="s3" placeholder="Impacto económico usando datos"></textarea>
-<textarea id="s4" placeholder="Organización de la unidad"></textarea>
-<textarea id="s5" placeholder="Uso de IA (prompt + análisis)"></textarea>
-<button onclick="guardar()">Guardar</button>
+<h3>Sebastián – Estrategia</h3>
+<input id="s1" placeholder="Problema">
+<textarea id="s2" placeholder="Objetivo"></textarea>
 </div>
 
 <div id="partida" class="card hidden">
-<h3>Pedro Partida – Analista de Negocio</h3>
-<textarea id="p1" placeholder="Impacto en la operación"></textarea>
-<textarea id="p2" placeholder="Costo-beneficio"></textarea>
-<textarea id="p3" placeholder="Decisión estratégica"></textarea>
-<button onclick="guardar()">Guardar</button>
+<h3>Pedro Partida – Negocio</h3>
+<textarea id="p1" placeholder="Impacto"></textarea>
 </div>
 
 <div id="yael" class="card hidden">
-<h3>Pedro Yael – Arquitecto de Infraestructura</h3>
-<input id="y1" placeholder="Infraestructura propuesta">
-<textarea id="y2" placeholder="Justificación técnica"></textarea>
-<textarea id="y3" placeholder="Costos estimados"></textarea>
-<button onclick="guardar()">Guardar</button>
+<h3>Infraestructura</h3>
+<input id="y1" placeholder="Solución técnica">
 </div>
 
 <div id="johan" class="card hidden">
-<h3>Johan – Responsable de Seguridad</h3>
-<input id="j1" placeholder="Riesgo principal">
-<textarea id="j2" placeholder="Controles de seguridad"></textarea>
-<textarea id="j3" placeholder="Políticas de protección"></textarea>
+<h3>Seguridad</h3>
+<input id="j1" placeholder="Riesgo">
+</div>
+
+<!-- VALIDACION -->
+<div class="card">
+<h3>Validación cruzada</h3>
+<input id="v0" placeholder="Nombre del compañero">
+<textarea id="v1" placeholder="Errores"></textarea>
+<textarea id="v2" placeholder="Mejoras"></textarea>
+<textarea id="v3" placeholder="Evaluación"></textarea>
 <button onclick="guardar()">Guardar</button>
 </div>
 
-<!-- 🔵 VALIDACION CRUZADA -->
-<div class="card">
-<h3>Validación Cruzada</h3>
-<textarea id="v1" placeholder="Errores detectados"></textarea>
-<textarea id="v2" placeholder="Mejoras propuestas"></textarea>
-<textarea id="v3" placeholder="Evaluación crítica"></textarea>
-<button onclick="guardar()">Guardar validación</button>
-</div>
-
-<!-- 🔵 OMAR -->
+<!-- OMAR -->
 <div id="omar" class="card hidden">
-<h3>Omar Martínez – Integración del Sistema</h3>
-<textarea id="o1" placeholder="Errores del sistema"></textarea>
-<textarea id="o2" placeholder="Conflictos entre áreas"></textarea>
-<textarea id="o3" placeholder="Riesgos críticos"></textarea>
-<textarea id="o4" placeholder="Decisión final"></textarea>
+<h3>Omar – Integración</h3>
+<textarea id="o1" placeholder="Análisis"></textarea>
 <label><input type="checkbox" id="o5"> Aprobar sistema</label>
-<button onclick="validarOmar()">Validar</button>
+<button onclick="validar()">Validar</button>
 </div>
 
-<!-- 🔵 CRISIS -->
-<div class="card">
-<h3>Simulación de Crisis</h3>
-<p>El sistema falla durante 2 horas en horario pico</p>
-<textarea id="c1" placeholder="Acciones inmediatas"></textarea>
-<textarea id="c2" placeholder="Solución a corto plazo"></textarea>
-<textarea id="c3" placeholder="Cambio estratégico"></textarea>
-<button onclick="guardar()">Guardar crisis</button>
-</div>
-
-<!-- 🔵 INTEGRACION FINAL -->
+<!-- INTEGRACION -->
 <div id="integracion" class="card locked">
-<h3>Integración Final</h3>
-
-<textarea id="f1" placeholder="Integra todas las áreas en una solución completa"></textarea>
-<textarea id="f2" placeholder="Decisión crítica del proyecto"></textarea>
-<textarea id="f3" placeholder="Impacto global"></textarea>
-<textarea id="f4" placeholder="Riesgos y mitigación"></textarea>
-<textarea id="f5" placeholder="Defensa ante directivos"></textarea>
-
-<button onclick="guardar()">Guardar</button>
+<h3>Integración final</h3>
+<textarea id="f1" placeholder="Solución integral"></textarea>
 </div>
 
+<!-- EXPORTAR -->
 <div class="card">
 <button onclick="exportar()">Descargar JSON</button>
+</div>
+
+<!-- MODO DOCENTE -->
+<div class="card">
+<h3>Modo docente</h3>
+
+<input type="file" id="docenteFile" accept=".json">
+<button onclick="cargarAlumno()">Cargar trabajo</button>
+
+<p id="estado"></p>
+
+<p id="sem1"></p>
+<p id="sem2"></p>
+<p id="sem3"></p>
+<p id="sem4"></p>
+
+<input id="calificacion" placeholder="Calificación">
+<textarea id="comentarios" placeholder="Observaciones"></textarea>
+
 </div>
 
 </div>
 
 <script>
 
+// TIMER
+let tiempo = 40 * 60;
+setInterval(()=>{
+let min=Math.floor(tiempo/60);
+let sec=tiempo%60;
+document.getElementById("timer").textContent =
+(min<10?"0":"")+min+":"+(sec<10?"0":"")+sec;
+tiempo--;
+if(tiempo<=0){
+document.getElementById("faseTexto").innerHTML="<b>Fase 2:</b> Intercambio";
+}
+},1000);
+
+// GUARDAR
+function guardar(){
+document.querySelectorAll("textarea,input").forEach(t=>{
+localStorage.setItem(t.id, t.type==="checkbox"?t.checked:t.value);
+});
+}
+
+// IMPORTAR
+function importarJSON(){
+let file=document.getElementById("fileInput").files[0];
+if(!file){alert("Selecciona archivo");return;}
+let reader=new FileReader();
+reader.onload=e=>{
+let data=JSON.parse(e.target.result);
+for(let k in data){localStorage.setItem(k,data[k]);}
+alert("Cargado");
+location.reload();
+};
+reader.readAsText(file);
+}
+
+// ROLES
 function cargarRol(){
 let rol=document.getElementById("rol").value;
 document.querySelectorAll(".card").forEach(c=>{
 if(c.id && c.id!="integracion") c.classList.add("hidden");
 });
 if(rol) document.getElementById(rol).classList.remove("hidden");
-cargarDatos();
 }
 
-function guardar(){
-document.querySelectorAll("textarea,input").forEach(t=>{
-localStorage.setItem(t.id, t.type==="checkbox"?t.checked:t.value);
-});
-actualizar();
-}
+// VALIDACION FINAL
+function validar(){
+let v1=localStorage.getItem("v1")||"";
+let v2=localStorage.getItem("v2")||"";
+let v3=localStorage.getItem("v3")||"";
 
-function cargarDatos(){
-document.querySelectorAll("textarea,input").forEach(t=>{
-if(t.type==="checkbox"){
-t.checked=localStorage.getItem(t.id)==="true";
-}else{
-t.value=localStorage.getItem(t.id)||"";
-}
-});
-actualizar();
-}
-
-function actualizar(){
-let validacionOK =
-(localStorage.getItem("v1")||"").length>10 &&
-(localStorage.getItem("v2")||"").length>10 &&
-(localStorage.getItem("v3")||"").length>10;
-
-let omarOK = localStorage.getItem("omar_aprobado")==="true";
-
-document.getElementById("integracion")
-.classList.toggle("locked", !(validacionOK && omarOK));
-}
-
-function validarOmar(){
-
-let validacionOK =
-(localStorage.getItem("v1")||"").length>10 &&
-(localStorage.getItem("v2")||"").length>10 &&
-(localStorage.getItem("v3")||"").length>10;
-
-if(!validacionOK){
-alert("Primero realiza validación cruzada");
+if(v1.length<10||v2.length<10||v3.length<10){
+alert("Validación incompleta");
 return;
 }
 
 if(!document.getElementById("o5").checked){
-alert("Debes aprobar el sistema");
+alert("Debes aprobar");
 return;
 }
 
-localStorage.setItem("omar_aprobado","true");
-alert("Sistema aprobado");
-actualizar();
+document.getElementById("integracion").classList.remove("locked");
 }
 
+// EXPORTAR
 function exportar(){
 let data={};
 document.querySelectorAll("textarea,input").forEach(t=>{
 data[t.id]=t.type==="checkbox"?t.checked:t.value;
 });
-let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+let blob=new Blob([JSON.stringify(data,null,2)]);
 let a=document.createElement("a");
 a.href=URL.createObjectURL(blob);
-a.download="proyecto_integrador.json";
+a.download="proyecto.json";
 a.click();
+}
+
+// DOCENTE
+function cargarAlumno(){
+let file=document.getElementById("docenteFile").files[0];
+if(!file){alert("Selecciona archivo");return;}
+let reader=new FileReader();
+reader.onload=e=>{
+let d=JSON.parse(e.target.result);
+
+document.getElementById("sem1").innerHTML="Rol: "+(d.s1||d.p1?"Cumple":"Bajo");
+document.getElementById("sem2").innerHTML="Validación: "+(d.v1?.length>20?"Buena":"Débil");
+document.getElementById("sem3").innerHTML="Omar: "+(d.o1?"Correcto":"Falta");
+document.getElementById("sem4").innerHTML="Integración: "+(d.f1?"Completa":"Incompleta");
+
+};
+reader.readAsText(file);
 }
 
 </script>
